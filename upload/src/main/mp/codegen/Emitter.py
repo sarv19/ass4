@@ -16,6 +16,10 @@ class Emitter():
         typeIn = type(inType)
         if typeIn is IntType:
             return "I"
+        elif typeIn is FloatType:
+            return "F"
+        elif typeIn is BoolType:
+            return "Z"
         elif typeIn is cgen.StringType:
             return "Ljava/lang/String;"
         elif typeIn is VoidType:
@@ -31,6 +35,10 @@ class Emitter():
         typeIn = type(inType)
         if typeIn is IntType:
             return "int"
+        elif typeIn is FloatType:
+            return "real"
+        elif typeIn is BoolType:
+            return "boolean"
         elif typeIn is cgen.StringType:
             return "java/lang/String"
         elif typeIn is VoidType:
@@ -39,7 +47,7 @@ class Emitter():
     def emitPUSHICONST(self, in_, frame):
         #in: Int or Sring
         #frame: Frame
-        
+
         frame.push();
         if type(in_) is int:
             i = in_
@@ -60,16 +68,16 @@ class Emitter():
     def emitPUSHFCONST(self, in_, frame):
         #in_: String
         #frame: Frame
-        
+
         f = float(in_)
         frame.push()
         rst = "{0:.4f}".format(f)
         if rst == "0.0" or rst == "1.0" or rst == "2.0":
             return self.jvm.emitFCONST(rst)
         else:
-            return self.jvm.emitLDC(in_)           
+            return self.jvm.emitLDC(in_)
 
-    ''' 
+    '''
     *    generate code to push a constant onto the operand stack.
     *    @param in the lexeme of the constant
     *    @param typ the type of the constant
@@ -78,9 +86,11 @@ class Emitter():
         #in_: String
         #typ: Type
         #frame: Frame
-        
+
         if type(typ) is IntType:
             return self.emitPUSHICONST(in_, frame)
+        elif type(typ) is FloatType:
+            return self.emitPUSHFCONST(in_, frame)
         elif type(typ) is StringType:
             frame.push()
             return self.jvm.emitLDC(in_)
@@ -93,7 +103,7 @@ class Emitter():
         #in_: Type
         #frame: Frame
         #..., arrayref, index, value -> ...
-        
+
         frame.pop()
         if type(in_) is IntType:
             return self.jvm.emitIALOAD()
@@ -106,7 +116,7 @@ class Emitter():
         #in_: Type
         #frame: Frame
         #..., arrayref, index, value -> ...
-        
+
         frame.pop()
         frame.pop()
         frame.pop()
@@ -131,7 +141,7 @@ class Emitter():
         #fromLabel: Int
         #toLabel: Int
         #frame: Frame
-        
+
         return self.jvm.emitVAR(in_, varName, self.getJVMType(inType), fromLabel, toLabel)
 
     def emitREADVAR(self, name, inType, index, frame):
@@ -140,7 +150,7 @@ class Emitter():
         #index: Int
         #frame: Frame
         #... -> ..., value
-        
+
         frame.push()
         if type(inType) is IntType:
             return self.jvm.emitILOAD(index)
@@ -171,7 +181,7 @@ class Emitter():
         #index: Int
         #frame: Frame
         #..., value -> ...
-        
+
         frame.pop()
 
         if type(inType) is IntType:
@@ -218,7 +228,7 @@ class Emitter():
         #lexeme: String
         #in_: Type
         #frame: Frame
-        
+
         frame.pop()
         return self.jvm.emitPUTSTATIC(lexeme, self.getJVMType(in_))
 
@@ -416,7 +426,7 @@ class Emitter():
             result.append(self.jvm.emitIFICMPGE(labelF))
         elif op == "<=":
             result.append(self.jvm.emitIFICMPGT(labelF))
-        elif op == "!=":
+        elif op == "<>":
             result.append(self.jvm.emitIFICMPEQ(labelF))
         elif op == "==":
             result.append(self.jvm.emitIFICMPNE(labelF))
@@ -449,7 +459,7 @@ class Emitter():
             result.append(self.jvm.emitIFICMPGE(falseLabel))
         elif op == "<=":
             result.append(self.jvm.emitIFICMPGT(falseLabel))
-        elif op == "!=":
+        elif op == "<>":
             result.append(self.jvm.emitIFICMPEQ(falseLabel))
         elif op == "==":
             result.append(self.jvm.emitIFICMPNE(falseLabel))
@@ -492,7 +502,7 @@ class Emitter():
     '''
 
     '''   generate code to initialize local array variables.
-    *   @param in the list of symbol entries corresponding to local array variable.    
+    *   @param in the list of symbol entries corresponding to local array variable.
     '''
 
     '''   generate code to jump to label if the value on top of operand stack is true.<p>
@@ -530,7 +540,7 @@ class Emitter():
         #frame: Frame
 
         frame.pop()
-        return self.jvm.emitIFICMPLT(label)    
+        return self.jvm.emitIFICMPLT(label)
 
     '''   generate code to duplicate the value on the top of the operand stack.<p>
     *   Stack:<p>
@@ -575,7 +585,7 @@ class Emitter():
         elif type(in_) is VoidType:
             return self.jvm.emitRETURN()
 
-    ''' generate code that represents a label	
+    ''' generate code that represents a label
     *   @param label the label
     *   @return code Label<label>:
     '''
@@ -585,7 +595,7 @@ class Emitter():
 
         return self.jvm.emitLABEL(label)
 
-    ''' generate code to jump to a label	
+    ''' generate code to jump to a label
     *   @param label the label
     *   @return code goto Label<label>
     '''
@@ -593,7 +603,7 @@ class Emitter():
         #label: Int
         #frame: Frame
 
-        return self.jvm.emitGOTO(label)
+        return self.jvm.emitGOTO(str(label))
 
     ''' generate some starting directives for a class.<p>
     *   .source MPC.CLASSNAME.java<p>
@@ -635,9 +645,3 @@ class Emitter():
 
     def clearBuff(self):
         self.buff.clear()
-
-
-
-
-
-        
