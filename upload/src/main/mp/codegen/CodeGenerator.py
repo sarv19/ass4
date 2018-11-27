@@ -163,6 +163,11 @@ class CodeGenVisitor(BaseVisitor, Utils):
         self.emit.printout(self.emit.emitENDMETHOD(frame))
         frame.exitScope();
 
+    def visitVarDecl(self, ast, o):
+        subctxt = o
+        self.emit.printout(self.emit.emitATTRIBUTE(ast.variable.name, ast.varType, False, None))
+        return SubBody(None, [Symbol(ast.variable.name, ast.varType, CName(self.className))]+subctxt.sym)
+
     def visitFuncDecl(self, ast, o):
         #ast: FuncDecl
         #o: Any
@@ -246,10 +251,10 @@ class CodeGenVisitor(BaseVisitor, Utils):
         elif ast.op in ['>','<','<>','=','<=','>=']:
             if type(lefttype) is type(righttype):
                 return left + right + self.emit.emitREOP(str(ast.op), lefttype, frame), BoolType()
-            elif type(lefttype) is FloatType:
-                return left + self.emit.emitI2F(frame) + right + self.emit.emitREOP(str(ast.op), lefttype, frame), BoolType()
+            elif type(righttype) is FloatType:
+                return left + self.emit.emitI2F(frame) + right + self.emit.emitREOP(str(ast.op), FloatType(), frame), BoolType()
             else:
-                return left + right + self.emit.emitI2F(frame) + self.emit.emitREOP(str(ast.op), righttype, frame), BoolType()
+                return left + right + self.emit.emitI2F(frame) + self.emit.emitREOP(str(ast.op), FloatType(), frame), BoolType()
         elif ast.op in ['-','+']:
             # if (type(lefttype) is IntType) and (type(righttype) is IntType):
             if type(lefttype) is type(righttype):
@@ -281,3 +286,36 @@ class CodeGenVisitor(BaseVisitor, Utils):
                     return left + self.emit.emitI2F(frame) + right + self.emit.emitMULOP(str(ast.op), FloatType(), frame), FloatType()
                 elif type(lefttype) is FloatType:
                     return left + right + self.emit.emitI2F(frame) + self.emit.emitMULOP(str(ast.op), FloatType(), frame), FloatType()
+
+    def visitUnaryOp(self, ast, o):
+        ctxt = o
+        frame = ctxt.frame
+        nenv = ctxt.sym
+        left, lefttype = self.visit(ast.body, Access(frame,nenv,True, True))
+        if ast.op == '-':
+            return left + self.emit.emitNEGOP(lefttype, frame), lefttype
+        else:
+            return left + self.emit.emitNOT(BoolType(), frame), BoolType()
+
+    def visitAssign(self, ast, o):
+        rc, rt = self.visit(ast.exp, Access(o.frame, o.sym, False, True))
+        lc, lt = self.visit(ast.lhs, Access(o.frame, o.sym, True, False))
+        if type(rt) is type(lt):
+            self.emit.printout(rc+lc)
+        elif type(rt) is IntType and type(lt) is FloatType:
+            self.emit.printout(rc + self.emit.emitI2F(o.frame) + lc)
+
+    def visitId(self, ast, o):
+        ctxt = o
+        frame = ctxt.frame
+        sym = self.lookup(ast.name, o.sym, lambda x: x.name)
+        if o.isLeft:
+            if type(sym.value) is CName:
+                return self.emit.emitPUTSTATIC(sym.value.value + "/" + sym.name, sym.mtype, frame), sym.mtype
+            else:
+                return "", VoidType()
+        else:
+            if type(sym.value) is CName:
+                return self.emit.emitGETSTATIC(sym.value.value + "/" + sym.name, sym.mtype, frame), sym.mtype
+            else:
+                return "", VoidType()

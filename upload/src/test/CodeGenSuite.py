@@ -157,16 +157,96 @@ class CheckCodeGenSuite(unittest.TestCase):
     # 	expect = "1"
     # 	self.assertTrue(TestCodeGen.test(input,expect,522))
 
-    def test_biop_18(self):
-    	input = Program([
-    		FuncDecl(Id("main"),[],[],[
-    			CallStmt(Id("putInt"),[BinaryOp('div',IntLiteral(5), IntLiteral(2))])])])
-    	expect = "2"
-    	self.assertTrue(TestCodeGen.test(input,expect,523))
+    # def test_biop_18(self):
+    # 	input = Program([
+    # 		FuncDecl(Id("main"),[],[],[
+    # 			CallStmt(Id("putInt"),[BinaryOp('div',IntLiteral(5), IntLiteral(2))])])])
+    # 	expect = "2"
+    # 	self.assertTrue(TestCodeGen.test(input,expect,523))
+    #
+    # def test_biop_19(self):
+    # 	input = Program([
+    # 		FuncDecl(Id("main"),[],[],[
+    # 			CallStmt(Id("putBool"),[BinaryOp('>',IntLiteral(5), IntLiteral(2))])])])
+    # 	expect = "true"
+    # 	self.assertTrue(TestCodeGen.test(input,expect,524))
 
-    def test_biop_19(self):
+    def test_biop_20(self):
     	input = Program([
     		FuncDecl(Id("main"),[],[],[
-    			CallStmt(Id("putBool"),[BinaryOp('>',IntLiteral(5), IntLiteral(2))])])])
+    			CallStmt(Id("putBool"),[BinaryOp('<>',IntLiteral(5), IntLiteral(5))])])])
+    	expect = "false"
+    	self.assertTrue(TestCodeGen.test(input,expect,525))
+
+    def test_biop_21(self):
+    	input = Program([
+    		FuncDecl(Id("main"),[],[],[
+    			CallStmt(Id("putBool"),[BinaryOp('>',FloatLiteral(5.5), IntLiteral(5))])])])
     	expect = "true"
-    	self.assertTrue(TestCodeGen.test(input,expect,524))
+    	self.assertTrue(TestCodeGen.test(input,expect,526))
+
+    def test_biop_22(self):
+    	input = Program([
+    		FuncDecl(Id("main"),[],[],[
+    			CallStmt(Id("putBool"),[BinaryOp('<',FloatLiteral(5.5), IntLiteral(5))])])])
+    	expect = "false"
+    	self.assertTrue(TestCodeGen.test(input,expect,527))
+
+    # def test_unaryop_1(self):
+    # 	input = Program([
+    # 		FuncDecl(Id("main"),[],[],[
+    # 			CallStmt(Id("putBool"),[UnaryOp('not', BooleanLiteral('true'))])])])
+    # 	expect = "false"
+    # 	self.assertTrue(TestCodeGen.test(input,expect,551))
+    #
+    # def test_unaryop_2(self):
+    # 	input = Program([
+    # 		FuncDecl(Id("main"),[],[],[
+    # 			CallStmt(Id("putInt"),[UnaryOp('-', IntLiteral(6))])])])
+    # 	expect = "-6"
+    # 	self.assertTrue(TestCodeGen.test(input,expect,552))
+    #
+    # def test_unaryop_3(self):
+    # 	input = Program([
+    # 		FuncDecl(Id("main"),[],[],[
+    # 			CallStmt(Id("putFloat"),[UnaryOp('-', FloatLiteral(6.6))])])])
+    # 	expect = "-6.6"
+    # 	self.assertTrue(TestCodeGen.test(input,expect,553))
+    #
+    # def test_unaryop_4(self):
+    # 	input = Program([
+    # 		FuncDecl(Id("main"),[],[],[
+    # 			CallStmt(Id("putBool"),[UnaryOp('not', BooleanLiteral('false'))])])])
+    # 	expect = "true"
+    # 	self.assertTrue(TestCodeGen.test(input,expect,554))
+
+    # def test_assign1(self):
+    # 	input = Program([VarDecl(Id('a'), IntType()),
+    #                      VarDecl(Id('b'), FloatType()),
+    #                      VarDecl(Id('c'), StringType()),
+    # 		FuncDecl(Id("main"),[],[],[
+    #             Assign(Id('a'),IntLiteral(5)),
+    # 			CallStmt(Id("putInt"),[Id('a')])])])
+    # 	expect = "5"
+    # 	self.assertTrue(TestCodeGen.test(input,expect,601))
+    #
+    # def test_assign1(self):
+    # 	input = Program([VarDecl(Id('a'), IntType()),
+    #                      VarDecl(Id('b'), FloatType()),
+    #                      VarDecl(Id('c'), StringType()),
+    # 		FuncDecl(Id("main"),[],[],[
+    #             Assign(Id('b'),IntLiteral(5)),
+    # 			CallStmt(Id("putFloat"),[Id('b')])])])
+    # 	expect = "5.0"
+    # 	self.assertTrue(TestCodeGen.test(input,expect,601))
+    #
+    # def test_assign2(self):
+    # 	input = Program([VarDecl(Id('a'), IntType()),
+    #                      VarDecl(Id('b'), FloatType()),
+    #                      VarDecl(Id('c'), StringType()),
+    #                      VarDecl(Id('d'), BoolType()),
+    # 		FuncDecl(Id("main"),[],[],[
+    #             Assign(Id('d'),BooleanLiteral('True')),
+    # 			CallStmt(Id("putBool"),[Id('d')])])])
+    # 	expect = "true"
+    # 	self.assertTrue(TestCodeGen.test(input,expect,602))
