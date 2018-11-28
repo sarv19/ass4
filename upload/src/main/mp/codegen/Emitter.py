@@ -430,7 +430,7 @@ class Emitter():
                 result.append(self.jvm.emitIFICMPGT(labelF))
             elif op == "<>":
                 result.append(self.jvm.emitIFICMPEQ(labelF))
-            elif op == "==":
+            elif op == "=":
                 result.append(self.jvm.emitIFICMPNE(labelF))
             result.append(self.emitPUSHCONST("1", IntType(), frame))
             frame.pop()
@@ -446,19 +446,19 @@ class Emitter():
 
             frame.pop()
             frame.pop()
-            if op == ">":
-                result.append(self.jvm.emitFCMPL())
-            # elif op == ">=":
-            #     result.append(self.jvm.emitIFICMPLT(labelF))
-            elif op == "<":
-                result.append(self.jvm.emitFCMPL())
-            # elif op == "<=":
-            #     result.append(self.jvm.emitIFICMPGT(labelF))
-            # elif op == "<>":
-            #     result.append(self.jvm.emitIFICMPEQ(labelF))
-            # elif op == "==":
-            #     result.append(self.jvm.emitIFICMPNE(labelF))
-            result.append(self.jvm.emitIFLE(labelF))
+            result.append(self.jvm.emitFCMPL())
+            if op == '>':
+                result.append(self.jvm.emitIFLE(labelF))
+            elif op == '<':
+                result.append(self.jvm.emitIFGE(labelF))
+            elif op == '=':
+                result.append(self.jvm.emitIFNE(labelF))
+            elif op == '>=':
+                result.append(self.jvm.emitIFLT(labelF))
+            elif op == '<=':
+                result.append(self.jvm.emitIFGT(labelF))
+            elif op == '<>':
+                result.append(self.jvm.emitIFEQ(labelF))
             result.append(self.emitPUSHCONST("1", IntType(), frame))
             frame.pop()
             result.append(self.emitGOTO(labelO, frame))

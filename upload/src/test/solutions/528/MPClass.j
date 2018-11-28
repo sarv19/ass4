@@ -5,10 +5,10 @@
 .method public static main([Ljava/lang/String;)V
 .var 0 is args [Ljava/lang/String; from Label0 to Label1
 Label0:
-	ldc 6.5
+	ldc 4.5
 	ldc 5.5
 	fcmpl
-	ifge Label2
+	iflt Label2
 	iconst_1
 	goto Label3
 Label2:

@@ -8,7 +8,7 @@ Label0:
 	ldc 6.5
 	ldc 5.5
 	fcmpl
-	ifge Label2
+	ifgt Label2
 	iconst_1
 	goto Label3
 Label2:
