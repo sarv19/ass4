@@ -119,7 +119,7 @@ class Frame():
         return self.endLabel[-1]
 
     '''
-    *   return a new index for a local variable declared in a scope. 
+    *   return a new index for a local variable declared in a scope.
     *   @return an integer that represents the index of the local variable
     '''
     def getNewIndex(self):
@@ -171,6 +171,6 @@ class Frame():
     *   @return an integer representing the break label
     '''
     def getBreakLabel(self):
-        if not brkLabel:
+        if not self.brkLabel:
             raise IllegalRuntimeException("None break label")
         return self.brkLabel[-1]

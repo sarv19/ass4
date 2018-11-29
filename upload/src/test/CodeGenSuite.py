@@ -171,47 +171,47 @@ class CheckCodeGenSuite(unittest.TestCase):
     # 	expect = "true"
     # 	self.assertTrue(TestCodeGen.test(input,expect,524))
 
-    def test_biop_20(self):
-    	input = Program([
-    		FuncDecl(Id("main"),[],[],[
-    			CallStmt(Id("putBool"),[BinaryOp('<>',IntLiteral(5), IntLiteral(5))])])])
-    	expect = "false"
-    	self.assertTrue(TestCodeGen.test(input,expect,525))
-
-    def test_biop_21(self):
-    	input = Program([
-    		FuncDecl(Id("main"),[],[],[
-    			CallStmt(Id("putBool"),[BinaryOp('>',FloatLiteral(5.5), IntLiteral(5))])])])
-    	expect = "true"
-    	self.assertTrue(TestCodeGen.test(input,expect,526))
-
-    def test_biop_22(self):
-    	input = Program([
-    		FuncDecl(Id("main"),[],[],[
-    			CallStmt(Id("putBool"),[BinaryOp('<',FloatLiteral(6.5), FloatLiteral(5.5))])])])
-    	expect = "false"
-    	self.assertTrue(TestCodeGen.test(input,expect,527))
-
-    def test_biop_23(self):
-    	input = Program([
-    		FuncDecl(Id("main"),[],[],[
-    			CallStmt(Id("putBool"),[BinaryOp('>=',FloatLiteral(4.5), FloatLiteral(5.5))])])])
-    	expect = "false"
-    	self.assertTrue(TestCodeGen.test(input,expect,528))
-
-    def test_biop_24(self):
-    	input = Program([
-    		FuncDecl(Id("main"),[],[],[
-    			CallStmt(Id("putBool"),[BinaryOp('<=',FloatLiteral(6.5), FloatLiteral(5.5))])])])
-    	expect = "false"
-    	self.assertTrue(TestCodeGen.test(input,expect,529))
-
-    def test_biop_25(self):
-    	input = Program([
-    		FuncDecl(Id("main"),[],[],[
-    			CallStmt(Id("putBool"),[BinaryOp('=',FloatLiteral(6.5), FloatLiteral(5.5))])])])
-    	expect = "false"
-    	self.assertTrue(TestCodeGen.test(input,expect,530))
+    # def test_biop_20(self):
+    # 	input = Program([
+    # 		FuncDecl(Id("main"),[],[],[
+    # 			CallStmt(Id("putBool"),[BinaryOp('<>',IntLiteral(5), IntLiteral(5))])])])
+    # 	expect = "false"
+    # 	self.assertTrue(TestCodeGen.test(input,expect,525))
+    #
+    # def test_biop_21(self):
+    # 	input = Program([
+    # 		FuncDecl(Id("main"),[],[],[
+    # 			CallStmt(Id("putBool"),[BinaryOp('>',FloatLiteral(5.5), IntLiteral(5))])])])
+    # 	expect = "true"
+    # 	self.assertTrue(TestCodeGen.test(input,expect,526))
+    #
+    # def test_biop_22(self):
+    # 	input = Program([
+    # 		FuncDecl(Id("main"),[],[],[
+    # 			CallStmt(Id("putBool"),[BinaryOp('<',FloatLiteral(6.5), FloatLiteral(5.5))])])])
+    # 	expect = "false"
+    # 	self.assertTrue(TestCodeGen.test(input,expect,527))
+    #
+    # def test_biop_23(self):
+    # 	input = Program([
+    # 		FuncDecl(Id("main"),[],[],[
+    # 			CallStmt(Id("putBool"),[BinaryOp('>=',FloatLiteral(4.5), FloatLiteral(5.5))])])])
+    # 	expect = "false"
+    # 	self.assertTrue(TestCodeGen.test(input,expect,528))
+    #
+    # def test_biop_24(self):
+    # 	input = Program([
+    # 		FuncDecl(Id("main"),[],[],[
+    # 			CallStmt(Id("putBool"),[BinaryOp('<=',FloatLiteral(6.5), FloatLiteral(5.5))])])])
+    # 	expect = "false"
+    # 	self.assertTrue(TestCodeGen.test(input,expect,529))
+    #
+    # def test_biop_25(self):
+    # 	input = Program([
+    # 		FuncDecl(Id("main"),[],[],[
+    # 			CallStmt(Id("putBool"),[BinaryOp('=',FloatLiteral(6.5), FloatLiteral(5.5))])])])
+    # 	expect = "false"
+    # 	self.assertTrue(TestCodeGen.test(input,expect,530))
 
     # def test_unaryop_1(self):
     # 	input = Program([
@@ -271,3 +271,14 @@ class CheckCodeGenSuite(unittest.TestCase):
     # 			CallStmt(Id("putBool"),[Id('d')])])])
     # 	expect = "true"
     # 	self.assertTrue(TestCodeGen.test(input,expect,602))
+
+    def test_while1(self):
+    	input = Program([VarDecl(Id('a'), IntType()),
+                         VarDecl(Id('b'), FloatType()),
+                         VarDecl(Id('c'), StringType()),
+                         VarDecl(Id('d'), BoolType()),
+    		FuncDecl(Id("main"),[],[],[Assign(Id('a'),IntLiteral(4)),
+                        While(BinaryOp('>',Id('a'), IntLiteral(3)),[Assign(Id('a'), IntLiteral(1))])
+            ])])
+    	expect = ""
+    	self.assertTrue(TestCodeGen.test(input,expect,701))

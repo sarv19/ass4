@@ -236,8 +236,9 @@ class CodeGenVisitor(BaseVisitor, Utils):
         ctxt = o
         frame = ctxt.frame
         nenv = ctxt.sym
-        left, lefttype = self.visit(ast.left, Access(frame,nenv,True, True))
-        right, righttype = self.visit(ast.right, Access(frame,nenv,True, True))
+        left, lefttype = self.visit(ast.left, Access(frame,nenv,False, True))
+
+        right, righttype = self.visit(ast.right, Access(frame,nenv,False, True))
         # return left + right + self.emit.emitADDOP(str(ast.op), IntType(), frame), IntType()
         if type(lefttype) is BoolType and type(righttype) is BoolType:
             if ast.op.lower() == 'and':
@@ -309,6 +310,7 @@ class CodeGenVisitor(BaseVisitor, Utils):
         ctxt = o
         frame = ctxt.frame
         sym = self.lookup(ast.name, o.sym, lambda x: x.name)
+
         if o.isLeft:
             if type(sym.value) is CName:
                 return self.emit.emitPUTSTATIC(sym.value.value + "/" + sym.name, sym.mtype, frame), sym.mtype
@@ -319,3 +321,23 @@ class CodeGenVisitor(BaseVisitor, Utils):
                 return self.emit.emitGETSTATIC(sym.value.value + "/" + sym.name, sym.mtype, frame), sym.mtype
             else:
                 return "", VoidType()
+
+    def visitWhile(self, ast, o):
+        ctxt = o
+        frame = ctxt.frame
+        result = list()
+
+        frame.enterLoop()
+
+        exp, expty = self.visit(ast.exp, o)
+
+        result.append(self.emit.emitLABEL(frame.getContinueLabel(), frame))
+        result.append(exp)
+        result.append(self.emit.emitIFFALSE(frame.getBreakLabel(), frame))
+
+        [self.visit(x, SubBody(frame, o.sym)) for x in ast.sl]
+
+        result.append(self.emit.emitGOTO(frame.getContinueLabel(), frame))
+        result.append(self.emit.emitLABEL(frame.getBreakLabel(), frame))
+
+        self.emit.printout(''.join(result))
