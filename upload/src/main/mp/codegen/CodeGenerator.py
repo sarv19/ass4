@@ -341,3 +341,5 @@ class CodeGenVisitor(BaseVisitor, Utils):
         result.append(self.emit.emitLABEL(frame.getBreakLabel(), frame))
 
         self.emit.printout(''.join(result))
+
+        frame.exitLoop()

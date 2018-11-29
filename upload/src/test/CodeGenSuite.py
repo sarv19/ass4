@@ -282,3 +282,17 @@ class CheckCodeGenSuite(unittest.TestCase):
             ])])
     	expect = ""
     	self.assertTrue(TestCodeGen.test(input,expect,701))
+
+    def test_while2(self):
+    	input = Program([VarDecl(Id('a'), IntType()),
+                         VarDecl(Id('b'), IntType()),
+                         VarDecl(Id('c'), StringType()),
+                         VarDecl(Id('d'), BoolType()),
+    		FuncDecl(Id("main"),[],[],[Assign(Id('a'),IntLiteral(4)),
+                                       Assign(Id('b'), IntLiteral(5)),
+                        While(BinaryOp('>',Id('a'), IntLiteral(3)),[Assign(Id('a'), IntLiteral(1)),
+                                                                    While(BinaryOp('>',Id('b'),IntLiteral(2)),
+                                                                    [Assign(Id('b'), IntLiteral(1))])])
+            ])])
+    	expect = ""
+    	self.assertTrue(TestCodeGen.test(input,expect,702))
