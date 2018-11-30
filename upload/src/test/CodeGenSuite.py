@@ -114,7 +114,7 @@ class CheckCodeGenSuite(unittest.TestCase):
     # 			CallStmt(Id("putFloat"),[BinaryOp('/',IntLiteral(5),IntLiteral(1))])])])
     # 	expect = "5.0"
     # 	self.assertTrue(TestCodeGen.test(input,expect,515))
-
+    #
     # def test_biop_12(self):
     # 	input = Program([
     # 		FuncDecl(Id("main"),[],[],[
@@ -156,7 +156,7 @@ class CheckCodeGenSuite(unittest.TestCase):
     # 			CallStmt(Id("putInt"),[BinaryOp('mod',IntLiteral(5), IntLiteral(2))])])])
     # 	expect = "1"
     # 	self.assertTrue(TestCodeGen.test(input,expect,522))
-
+    #
     # def test_biop_18(self):
     # 	input = Program([
     # 		FuncDecl(Id("main"),[],[],[
@@ -170,7 +170,7 @@ class CheckCodeGenSuite(unittest.TestCase):
     # 			CallStmt(Id("putBool"),[BinaryOp('>',IntLiteral(5), IntLiteral(2))])])])
     # 	expect = "true"
     # 	self.assertTrue(TestCodeGen.test(input,expect,524))
-
+    #
     # def test_biop_20(self):
     # 	input = Program([
     # 		FuncDecl(Id("main"),[],[],[
@@ -212,7 +212,7 @@ class CheckCodeGenSuite(unittest.TestCase):
     # 			CallStmt(Id("putBool"),[BinaryOp('=',FloatLiteral(6.5), FloatLiteral(5.5))])])])
     # 	expect = "false"
     # 	self.assertTrue(TestCodeGen.test(input,expect,530))
-
+    #
     # def test_unaryop_1(self):
     # 	input = Program([
     # 		FuncDecl(Id("main"),[],[],[
@@ -240,7 +240,7 @@ class CheckCodeGenSuite(unittest.TestCase):
     # 			CallStmt(Id("putBool"),[UnaryOp('not', BooleanLiteral('false'))])])])
     # 	expect = "true"
     # 	self.assertTrue(TestCodeGen.test(input,expect,554))
-
+    #
     # def test_assign1(self):
     # 	input = Program([VarDecl(Id('a'), IntType()),
     #                      VarDecl(Id('b'), FloatType()),
@@ -271,28 +271,130 @@ class CheckCodeGenSuite(unittest.TestCase):
     # 			CallStmt(Id("putBool"),[Id('d')])])])
     # 	expect = "true"
     # 	self.assertTrue(TestCodeGen.test(input,expect,602))
+    #
+    # def test_while1(self):
+    # 	input = Program([VarDecl(Id('a'), IntType()),
+    #                      VarDecl(Id('b'), FloatType()),
+    #                      VarDecl(Id('c'), StringType()),
+    #                      VarDecl(Id('d'), BoolType()),
+    # 		FuncDecl(Id("main"),[],[],[Assign(Id('a'),IntLiteral(4)),
+    #                     While(BinaryOp('>',Id('a'), IntLiteral(3)),[Assign(Id('a'), IntLiteral(1))])
+    #         ])])
+    # 	expect = ""
+    # 	self.assertTrue(TestCodeGen.test(input,expect,701))
+    #
+    # def test_while2(self):
+    # 	input = Program([VarDecl(Id('a'), IntType()),
+    #                      VarDecl(Id('b'), IntType()),
+    #                      VarDecl(Id('c'), StringType()),
+    #                      VarDecl(Id('d'), BoolType()),
+    # 		FuncDecl(Id("main"),[],[],[Assign(Id('a'),IntLiteral(4)),
+    #                                    Assign(Id('b'), IntLiteral(5)),
+    #                     While(BinaryOp('>',Id('a'), IntLiteral(3)),[Assign(Id('a'), IntLiteral(1)),
+    #                                                                 While(BinaryOp('>',Id('b'),IntLiteral(2)),
+    #                                                                 [Assign(Id('b'), IntLiteral(1))])])
+    #         ])])
+    # 	expect = ""
+    # 	self.assertTrue(TestCodeGen.test(input,expect,702))
+    #
+    # def test_while2(self):
+    # 	input = Program([VarDecl(Id('a'), IntType()),
+    #                      VarDecl(Id('b'), IntType()),
+    #                      VarDecl(Id('c'), StringType()),
+    #                      VarDecl(Id('d'), BoolType()),
+    # 		FuncDecl(Id("main"),[],[],[Assign(Id('a'),IntLiteral(4)),
+    #                                    Assign(Id('b'), IntLiteral(5)),
+    #                     While(BinaryOp('>',Id('a'), IntLiteral(3)),[Assign(Id('a'),BinaryOp('+',Id('a'),IntLiteral(1)))])
+    #         ])])
+    # 	expect = ""
+    # 	self.assertTrue(TestCodeGen.test(input,expect,702))
+    #
+    # def test_if2(self):
+    # 	input = Program([VarDecl(Id('a'), IntType()),
+    #                      VarDecl(Id('b'), IntType()),
+    #                      VarDecl(Id('c'), StringType()),
+    #                      VarDecl(Id('d'), BoolType()),
+    # 		FuncDecl(Id("main"),[],[],[
+    #                     If(BinaryOp('>',IntLiteral(2),IntLiteral(1)),[CallStmt(Id("putInt"),[IntLiteral(5)]),
+    #                                                                   CallStmt(Id("putInt"),[IntLiteral(6)])],[])
+    #         ])])
+    # 	expect = "56"
+    # 	self.assertTrue(TestCodeGen.test(input,expect,802))
+    #
+    # def test_if2(self):
+    # 	input = """
+    #         procedure main();
+    #         var a: integer;
+    #         begin
+    #
+    #             a:=5;
+    #             while a<8 do a:=a+1;
+    #         end
+    #     """
+    # 	expect = ""
+    # 	self.assertTrue(TestCodeGen.test(input,expect,802))
 
-    def test_while1(self):
-    	input = Program([VarDecl(Id('a'), IntType()),
-                         VarDecl(Id('b'), FloatType()),
-                         VarDecl(Id('c'), StringType()),
-                         VarDecl(Id('d'), BoolType()),
-    		FuncDecl(Id("main"),[],[],[Assign(Id('a'),IntLiteral(4)),
-                        While(BinaryOp('>',Id('a'), IntLiteral(3)),[Assign(Id('a'), IntLiteral(1))])
-            ])])
-    	expect = ""
-    	self.assertTrue(TestCodeGen.test(input,expect,701))
+    # def test_for1(self):
+    # 	input = """
+    #         procedure main();
+    #
+    #             var a: integer;
+    #         begin
+    #             for a:= 1 to 5 do
+    #                 putFloatLn(7);
+    #         end
+    #     """
+    # 	expect = "7.0\n7.0\n7.0\n7.0\n7.0\n"
+    # 	self.assertTrue(TestCodeGen.test(input,expect,803))
 
-    def test_while2(self):
-    	input = Program([VarDecl(Id('a'), IntType()),
-                         VarDecl(Id('b'), IntType()),
-                         VarDecl(Id('c'), StringType()),
-                         VarDecl(Id('d'), BoolType()),
-    		FuncDecl(Id("main"),[],[],[Assign(Id('a'),IntLiteral(4)),
-                                       Assign(Id('b'), IntLiteral(5)),
-                        While(BinaryOp('>',Id('a'), IntLiteral(3)),[Assign(Id('a'), IntLiteral(1)),
-                                                                    While(BinaryOp('>',Id('b'),IntLiteral(2)),
-                                                                    [Assign(Id('b'), IntLiteral(1))])])
-            ])])
-    	expect = ""
-    	self.assertTrue(TestCodeGen.test(input,expect,702))
+    # def test_call_expr1(self):
+    # 	input = """
+    #         function foo(b:integer):integer;
+    #         BEGIN
+    #             return b;
+    #         end
+    #
+    #         procedure main();
+    #             var a: integer;
+    #         begin
+    #             for a:= 1 to 5 do
+    #                 putInt(foo(7));
+    #         end
+    #     """
+    # 	expect = "77777"
+    # 	self.assertTrue(TestCodeGen.test(input,expect,901))
+
+    def test_int(self):
+        """Simple program: int main() {} """
+        input="""
+            function isPrime(n:integer):boolean;
+            var flag:boolean;
+            i:integer;
+            begin
+                if (n = 1) or (n = 0 )then
+                    return False;
+                if (n = 2) or (n = 3)  then
+                    return true;
+                flag := true;
+
+                for i:= 2 to n div 2 do
+                begin
+                    if n - (n div i) * i = 0 then
+                    begin
+                        flag := false;
+                        break;
+                    end
+                end
+                return flag;
+            end
+            procedure main();
+            begin
+                putBoolLn(isPrime(1));
+                putBoolLn(isPrime(2));
+                putBoolLn(isPrime(7));
+                putBool(IsPrime(14));
+
+            end
+        """
+        expect = "2000.0"
+        self.assertTrue(TestCodeGen.test(input,expect,500))

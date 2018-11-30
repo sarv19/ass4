@@ -13,22 +13,6 @@ Label0:
 	putstatic MPClass/a I
 	iconst_5
 	putstatic MPClass/b I
-	iconst_1
-	putstatic MPClass/a I
-	iconst_1
-	putstatic MPClass/b I
-Label6:
-	getstatic MPClass/b I
-	iconst_2
-	if_icmple Label8
-	iconst_1
-	goto Label9
-Label8:
-	iconst_0
-Label9:
-	ifle Label7
-	goto Label6
-Label7:
 Label2:
 	getstatic MPClass/a I
 	iconst_3
@@ -39,11 +23,15 @@ Label4:
 	iconst_0
 Label5:
 	ifle Label3
+	getstatic MPClass/a I
+	iconst_1
+	iadd
+	putstatic MPClass/a I
 	goto Label2
 Label3:
 Label1:
 	return
-.limit stack 5
+.limit stack 4
 .limit locals 1
 .end method
 

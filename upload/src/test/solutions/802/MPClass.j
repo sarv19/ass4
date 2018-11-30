@@ -1,34 +1,33 @@
 .source MPClass.java
 .class public MPClass
 .super java.lang.Object
-.field static a I
-.field static b F
-.field static c Ljava/lang/String;
-.field static d Z
 
 .method public static main([Ljava/lang/String;)V
 .var 0 is args [Ljava/lang/String; from Label0 to Label1
+.var 1 is a I from Label0 to Label1
 Label0:
-	iconst_4
-	putstatic MPClass/a I
+	iconst_5
+	istore_1
 Label2:
-	getstatic MPClass/a I
-	iconst_3
-	if_icmple Label4
+	iload_1
+	bipush 8
+	if_icmpge Label4
 	iconst_1
 	goto Label5
 Label4:
 	iconst_0
 Label5:
 	ifle Label3
+	iload_1
 	iconst_1
-	putstatic MPClass/a I
+	iadd
+	istore_1
 	goto Label2
 Label3:
 Label1:
 	return
-.limit stack 3
-.limit locals 1
+.limit stack 4
+.limit locals 2
 .end method
 
 .method public <init>()V
