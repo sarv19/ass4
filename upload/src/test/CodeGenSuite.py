@@ -326,12 +326,13 @@ class CheckCodeGenSuite(unittest.TestCase):
     #         procedure main();
     #         var a: integer;
     #         begin
-    #
-    #             a:=5;
-    #             while a<8 do a:=a+1;
+    #             a:=6;
+    #             if a>=5 then
+    #                 a:=a+1;
+    #             putInt(a);
     #         end
     #     """
-    # 	expect = ""
+    # 	expect = "7"
     # 	self.assertTrue(TestCodeGen.test(input,expect,802))
 
     # def test_for1(self):
@@ -351,50 +352,125 @@ class CheckCodeGenSuite(unittest.TestCase):
     # 	input = """
     #         function foo(b:integer):integer;
     #         BEGIN
-    #             return b;
+    #             return b+1;
     #         end
     #
     #         procedure main();
     #             var a: integer;
     #         begin
-    #             for a:= 1 to 5 do
-    #                 putInt(foo(7));
+    #             a:=1;
+    #             putInt(foo(1));
     #         end
     #     """
-    # 	expect = "77777"
+    # 	expect = "2"
     # 	self.assertTrue(TestCodeGen.test(input,expect,901))
 
-    def test_int(self):
-        """Simple program: int main() {} """
-        input="""
-            function isPrime(n:integer):boolean;
-            var flag:boolean;
-            i:integer;
-            begin
-                if (n = 1) or (n = 0 )then
-                    return False;
-                if (n = 2) or (n = 3)  then
-                    return true;
-                flag := true;
+    # def test_return1(self):
+    # 	input = """
+    #         function foo(n:integer):boolean;
+    #         begin
+    #             if (n = 1) or (n = 0 )then
+    #                 return false;
+    #             return true;
+    #         end
+    #
+    #         procedure main();
+    #         BEGIN
+    #             putBool(foo(5));
+    #         end
+    #     """
+    # 	expect = "true"
+    # 	self.assertTrue(TestCodeGen.test(input,expect,1001))
 
-                for i:= 2 to n div 2 do
-                begin
-                    if n - (n div i) * i = 0 then
-                    begin
-                        flag := false;
-                        break;
-                    end
-                end
-                return flag;
-            end
-            procedure main();
-            begin
-                putBoolLn(isPrime(1));
-                putBoolLn(isPrime(2));
-                putBoolLn(isPrime(7));
-                putBool(IsPrime(14));
+    # def test_int(self):
+    #     """Simple program: int main() {} """
+    #     input="""
+    #         function isPrime(n:integer):boolean;
+    #         var flag:boolean;
+    #         i:integer;
+    #         begin
+    #             if (n = 1) or (n = 0 )then
+    #                 return False;
+    #             if (n = 2) or (n = 3)  then
+    #                 return true;
+    #             flag := true;
+    #
+    #             for i:= 2 to n div 2 do
+    #             begin
+    #                 if n - (n div i) * i = 0 then
+    #                 begin
+    #                     flag := false;
+    #                     break;
+    #                 end
+    #             end
+    #             return flag;
+    #         end
+    #
+    #         procedure main();
+    #         begin
+    #             putBoolLn(isPrime(1));
+    #             putBoolLn(isPrime(2));
+    #             putBoolLn(isPrime(7));
+    #             putBool(IsPrime(14));
+    #
+    #         end
+    #     """
+    #     expect = "false\ntrue\ntrue\nfalse"
+    #     self.assertTrue(TestCodeGen.test(input,expect,500))
 
-            end
-        """
-        expect = "2000.0"
+
+
+    # def test_10(self):
+    #     input="""
+    #         var a,b,c:integer;
+    #         function foo(i:integer):boolean;
+    #         begin
+    #             a:=a+i;
+    #             return i>=5;
+    #         end
+    #         procedure main();
+    #         var x:boolean;
+    #         begin
+    #             a:=0;
+    #             putBoolLn( ((foo(1) or foo(2)) or foo(3)) or foo(7));
+    #             putIntLn(a);
+    #             a:=0;
+    #             putBoolLn(foo(1) or else foo(2) or else foo(3) or else foo(4));
+    #             putIntLn(a);
+    #             a:=0;
+    #             putBoolLn( ((foo(1) or foo(2)) or foo(3)) or foo(7));
+    #             putIntLn(a);
+    #             a:=0;
+    #             putBoolLn(foo(1) or foo(2) or else foo(5) or else foo(7));
+    #             putInt(a);
+    #
+    #         end
+    #     """
+    #     expect = "true\n13\nfalse\n10\ntrue\n13\ntrue\n8"
+    #     self.assertTrue(TestCodeGen.test(input,expect,500))
+
+    # def test_5(self):
+    #     input="""
+    #         procedure main();
+    #         var a:boolean;
+    #         begin
+    #             a:= 3+4 > 5 ;
+    #             if a then
+    #             with b:integer ; do
+    #             begin
+    #                 b:=3 ;
+    #                 putBoolLn(true);
+    #                 putIntLn(3);
+    #             end
+    #             else
+    #                 putBoolLn(false);
+    #             putInt(1);
+    #         end
+    #     """
+    #     expect = "true\n3\n1"
+    #     self.assertTrue(TestCodeGen.test(input,expect,500))
+
+    def test_4(self):
+        input=
+        expect = "true\n3\n1"
         self.assertTrue(TestCodeGen.test(input,expect,500))

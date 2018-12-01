@@ -2,8 +2,9 @@
             procedure main();
             var a: integer;
             begin
-
-                a:=5;
-                while a<8 do a:=a+1;
+                a:=6;
+                if a>=5 then
+                    a:=a+1;
+                putInt(a);
             end
         

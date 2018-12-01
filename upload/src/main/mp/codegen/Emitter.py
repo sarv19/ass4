@@ -156,6 +156,12 @@ class Emitter():
         frame.push()
         if type(inType) is IntType:
             return self.jvm.emitILOAD(index)
+        elif type(inType) is FloatType:
+            return self.jvm.emitFLOAD(index)
+        elif type(inType) is BoolType:
+            return self.jvm.emitILOAD(index)
+        elif type(inType) is StringType:
+            return self.jvm.emitALOAD(index)
         elif type(inType) is cgen.ArrayPointerType or type(inType) is cgen.ClassType or type(inType) is StringType:
             return self.jvm.emitALOAD(index)
         else:
@@ -188,6 +194,12 @@ class Emitter():
 
         if type(inType) is IntType:
             return self.jvm.emitISTORE(index)
+        elif type(inType) is FloatType:
+            return self.jvm.emitFSTORE(index)
+        elif type(inType) is BoolType:
+            return self.jvm.emitISTORE(index)
+        elif type(inType) is StringType:
+            return self.jvm.emitASTORE(index)
         elif type(inType) is cgen.ArrayPointerType or type(inType) is cgen.ClassType or type(inType) is StringType:
             return self.jvm.emitASTORE(index)
         else:
@@ -466,6 +478,33 @@ class Emitter():
             result.append(self.emitPUSHCONST("0", IntType(), frame))
             result.append(self.emitLABEL(labelO, frame))
             return ''.join(result)
+        # else:
+        #     if op == 'andthen':
+        #         result = list()
+        #         labelF = frame.getNewLabel()
+        #         labelO = frame.getNewLabel()
+        #         frame.pop()
+        #         result.append(self.jvm.emitDUP())
+        #         result.append(self.jvm.emitIFEQ(labelO))
+        #         result.append(self.emitGOTO(labelF,frame))
+        #         result.append(self.emitLABEL(labelF,frame))
+        #         frame.pop()
+        #         result.append(self.emitANDOP(frame))
+        #         result.append(self.emitLABEL(labelO,frame))
+        #         return ''.join(result)
+        #     else:
+        #         result = list()
+        #         labelF = frame.getNewLabel()
+        #         labelO = frame.getNewLabel()
+        #         frame.pop()
+        #         result.append(self.jvm.emitDUP())
+        #         result.append(self.jvm.emitIFEQ(labelF))
+        #         result.append(self.emitGOTO(labelO,frame))
+        #         result.append(self.emitLABEL(labelF,frame))
+        #         frame.pop()
+        #         result.append(self.emitOROP(frame))
+        #         result.append(self.emitLABEL(labelO,frame))
+        #         return ''.join(result)
 
     def emitRELOP(self, op, in_, trueLabel, falseLabel, frame):
         #op: String
@@ -611,6 +650,15 @@ class Emitter():
         if type(in_) is IntType:
             frame.pop()
             return self.jvm.emitIRETURN()
+        elif type(in_) is BoolType:
+            frame.pop()
+            return self.jvm.emitIRETURN()
+        elif type(in_) is FloatType:
+            frame.pop()
+            return self.jvm.emitFRETURN()
+        elif type(in_) is StringType:
+            frame.pop()
+            return self.jvm.emitARETURN()
         elif type(in_) is VoidType:
             return self.jvm.emitRETURN()
 
