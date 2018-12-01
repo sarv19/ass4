@@ -1,0 +1,13 @@
+ var a:integer;
+                    procedure main();
+                    var b:integer;
+                    begin
+                        a := b := 1;
+                        with a:integer; do
+                            begin
+                                a := b;
+                                putIntLn(a);
+                            end
+                        putInt(a + b);
+                    end
+                    

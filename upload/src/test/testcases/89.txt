@@ -1,0 +1,6 @@
+ pRoceDure MaiN();
+                    begin
+                        putBool(not not not not false);
+                    end
+
+                    

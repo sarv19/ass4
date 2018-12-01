@@ -1,0 +1,13 @@
+
+                    procedure print2console(n : integer);
+                    begin
+                        if n = -1 then return;
+                        putInt(n);
+                        print2console(n - 1);
+                        putInt(n);
+                    end
+                    procedure main();
+                    begin
+                        print2console(5);
+                    end
+                    

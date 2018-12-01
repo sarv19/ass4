@@ -1,0 +1,32 @@
+ procedure main();
+                  begin
+                      putInt(toDecimal(1010));
+                  end
+
+                  function toDecimal(n : integer):integer;
+                  var decimal:integer; remainder : integer; temp: integer; iCounter: integer;
+                  begin
+                      temp := n;
+                      decimal := 0;
+                      iCounter := 0;
+
+                      while (temp <> 0) do
+                          begin
+                              remainder := temp mod 10;
+                              temp := temp div 10;
+                              decimal := decimal + remainder * getPower(2, iCounter);
+                              iCounter := iCounter + 1;
+                          end
+                      return decimal;
+
+                  end
+
+                  function getPower(n : integer; power:integer):integer;
+                  var iCounter: integer; result:integer;
+                  begin
+                      result := 1;
+                      for iCOUNTER := 1 to power do
+                          result := result*n;
+                      return result;
+                  end
+                    

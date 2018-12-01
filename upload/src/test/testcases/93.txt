@@ -1,0 +1,31 @@
+ pRoceDure MaiN();
+                    begin
+                        putString("IPv4 192.168.1.1 is ");
+                        toIpv4(192,168,1,1);
+                    end
+
+                    procedure toIpv4(addr1, addr2, addr3, addr4:integer);
+                    begin
+                        toBinary(addr1);
+                        putString(".");
+                        toBinary(addr2);
+                        putString(".");
+                        toBinary(addr3);
+                        putString(".");
+                        toBinary(addr4);
+                    end
+
+                    procedure toBinary(n : integer);
+                    var quotient, remainder: integer;
+                    begin
+                        if n = 0 then return;
+
+                        quotient := n div 2;
+                        remainder := n mod 2;
+
+                        toBinary(quotient);
+
+                        putInt(remainder);
+                    end
+
+                    

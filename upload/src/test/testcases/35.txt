@@ -1,0 +1,22 @@
+ procedure swap(a,b:real);
+                    var temp:real;
+                    begin
+                        temp := a;
+                        a := b;
+                        b := temp;
+                        putStringLn("Swap successful");
+                        putString("a = "); putFloatLn(a);
+                        putString("b = "); putFloatLn(b);
+                    end
+
+                    procedure main();
+                    var a,b:integer;
+                    begin
+                        a := 5;
+                        b := 10;
+                        putString("a = "); putFloatLn(a);
+                        putString("b = "); putFloatLn(b);
+
+                        swap(a,b);
+                    end
+                    

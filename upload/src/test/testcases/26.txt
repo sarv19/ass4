@@ -1,0 +1,12 @@
+ procedure main();
+                    var a:integer;
+                    begin
+                        a := 0;
+                        while (a < 10) do
+                            begin
+                                if (a = 5) then break;
+                                a := a + 1;
+                            end
+
+                        putInt(a);
+                    end

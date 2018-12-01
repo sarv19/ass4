@@ -1,0 +1,17 @@
+ procedure main();
+                    begin
+                        if true then
+                            if true then
+                                if true or false then
+                                    putInt(1);
+                                else
+                                    putInt(2);
+                            else
+                                putInt(3);
+                        else
+                            if true and false then
+                                putInt(4);
+                            else putInt(5);
+                    end
+
+                    

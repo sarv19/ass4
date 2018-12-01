@@ -1,0 +1,6 @@
+ pRoceDure MaiN();
+                    begin
+                        putBool(1.1 >= 1.1);
+                    end
+
+                    

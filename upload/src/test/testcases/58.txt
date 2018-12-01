@@ -1,0 +1,5 @@
+ procedure main();
+                    begin
+                        putFLoat(2e-3);
+                    end
+                    

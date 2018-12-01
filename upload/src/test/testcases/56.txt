@@ -1,0 +1,18 @@
+ var a:integer;
+                    function fooT():boolean;
+                    begin
+                        putIntLn(1);
+                        return false;
+                    end
+
+                    function fooF():boolean;
+                    begin
+                        putIntLn(2);
+                        return true;
+                    end
+
+                    procedure main();
+                    begin
+                        putBool((1 > 0 and then 0 >= 1) and then fooF());
+                    end
+                    

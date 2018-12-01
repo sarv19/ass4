@@ -1,0 +1,19 @@
+
+                    procedure toBinary(n : integer);
+                    var quotient, remainder: integer;
+                    begin
+                        if n = 0 then return;
+
+                        quotient := n div 2;
+                        remainder := n mod 2;
+
+                        toBinary(quotient);
+
+                        putInt(remainder);
+                    end
+
+                    procedure main();
+                    begin
+                        toBinary(10);
+                    end
+                    

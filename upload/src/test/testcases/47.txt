@@ -1,0 +1,16 @@
+
+                    procedure main();
+                    var b:integer;
+                    begin
+                        a := b := 1;
+                        with a:real; b:integer; c:boolean; do
+                            begin
+                                b := 2;
+                                a := b;
+                                putFloatLn(a + b);
+                            end
+                        putFloat(a + b);
+                    end
+
+                    var a:real;
+                    

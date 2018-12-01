@@ -1,0 +1,13 @@
+ procedure main();
+                  begin
+                      putInt(foo());
+                  end
+
+                  function foo():integer;
+                  begin
+                      if (1 > 0 or else 1 > 1) then
+                          return 1;
+                      else return 2;
+                  end
+
+                    

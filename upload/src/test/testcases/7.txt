@@ -1,0 +1,1 @@
+procedure main(); begin putFloat(6/4); end

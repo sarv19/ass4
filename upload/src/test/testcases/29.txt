@@ -1,0 +1,12 @@
+
+                    procedure main();
+                    begin
+                        putBool(true and then false and then foo());
+                    end
+
+                    function foo():boolean;
+                    begin
+                        putInt(1);
+                        return true;
+                    end
+                    

@@ -1,0 +1,7 @@
+ procedure main();
+                    var a:integer;
+                    begin
+                        b := a := 1;
+                        putInt(a);
+                    end
+                    var b:real;

@@ -1,0 +1,39 @@
+ procedure main();
+                    begin
+                        printTriangle(5);
+                    end
+
+                    procedure printTriangle(height : integer);
+                    var iCounter, jCounter, kCounter : integer;
+                    begin
+                        for iCounter := 1 to height do
+                            begin
+                                for kCounter := iCounter + 1 to height do printSpace();
+                                if (iCounter = 1) or (iCounter = height) then
+                                    begin
+                                        if iCounter = 1 then printStar();
+                                        if iCounter = height then
+                                            for jCounter := 1 to 2*iCounter - 1 do printStar();
+                                        putLn();
+                                    end
+                                else
+                                    begin
+                                        printStar();
+                                        for jCounter := 1 to 2 * (iCounter - 1) - 1 do printSpace();
+                                        printStar();
+                                        putLn();
+                                    end
+                            end
+
+                    end
+
+                    procedure printStar();
+                    begin
+                        putString("*");
+                    end
+
+                    procedure printSpace();
+                    begin
+                        putString(" ");
+                    end
+                    

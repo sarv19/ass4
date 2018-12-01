@@ -1,0 +1,36 @@
+ procedure main();
+                    begin
+                        printDiamond(7);
+                    end
+
+                    procedure printDiamond(row : integer);
+                    var height, iCounter, jCounter, kCounter : integer;
+                    begin
+                        height := row div 2 + 1;
+
+                        for iCounter := 1 to height do
+                            begin
+                                for kCounter := iCounter + 1 to height do printSpace();
+                                for jCounter := 1 to 2 * iCounter - 1 do printStar();
+                                putLn();
+                            end
+
+                        for iCounter := height - 1 downto 1 do
+                            begin
+                                for kCounter := iCounter + 1 to height do printSpace();
+                                for jCounter := 1 to 2 * iCounter - 1 do printStar();
+                                putLn();
+                            end
+
+                    end
+
+                    procedure printStar();
+                    begin
+                        putString("*");
+                    end
+
+                    procedure printSpace();
+                    begin
+                        putString(" ");
+                    end
+                    

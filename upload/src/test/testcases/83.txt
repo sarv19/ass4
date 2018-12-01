@@ -1,0 +1,6 @@
+ pRoceDure MaiN();
+                    begin
+                        putInt(------1);
+                    end
+
+                    

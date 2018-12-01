@@ -1,0 +1,6 @@
+ pRoceDure MaiN();
+                    begin
+                        putFloat(--------7.8);
+                    end
+
+                    

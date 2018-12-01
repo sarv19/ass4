@@ -1,0 +1,12 @@
+ function getFactorial(n : integer):integer;
+                    begin
+                        if (n = 1) then return 1;
+
+                        return n * getFactorial(n - 1);
+                    end
+
+                    procedure main();
+                    begin
+                        putInt(getFactorial(5));
+                    end
+                    

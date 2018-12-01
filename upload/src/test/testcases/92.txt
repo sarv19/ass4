@@ -1,0 +1,6 @@
+ pRoceDure MaiN();
+                    begin
+                        putString("NaNI!? Omae Wa Mou Shindeiru");
+                    end
+
+                    

@@ -1,0 +1,40 @@
+ procedure main();
+                    begin
+                        printTriangle(5);
+                    end
+
+                    procedure printTriangle(height : integer);
+                    var iCounter, jCounter, kCounter : integer;
+                    begin
+                        for iCounter := 1 to height do
+                            begin
+                                for kCounter := iCounter + 1 to height do printSpace();
+                                putInt(getNumberOfHeight(iCounter));
+                                putLn();
+                            end
+
+                    end
+
+                    function getNumberOfHeight(height : integer):integer;
+                    var sum, iCounter: integer;
+                    begin
+                        sum := 0;
+
+                        for iCounter := height downto 1 do
+                            begin
+                                sum := sum * 10 + iCounter;
+                            end
+
+                        for iCounter := 2 to height do
+                            begin
+                                sum := sum * 10 + iCounter;
+                            end
+
+                        return sum;
+                    end
+
+                    procedure printSpace();
+                    begin
+                        putString(" ");
+                    end
+                    

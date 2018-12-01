@@ -1,0 +1,16 @@
+ procedure main();
+                    var A:integer;
+                    begin
+                        a := 1;
+                        foo2();
+                    end
+                    function foo():integer;
+                    begin
+                        return 1;
+                    end
+
+                    procedure foo2();
+                    begin
+                        putInt(1);
+                    end
+                    

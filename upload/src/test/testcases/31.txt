@@ -1,0 +1,13 @@
+
+                    procedure main();
+                    begin
+                        putInt(fibonacci(5));
+                    end
+
+                    function fibonacci(n:integer):integer;
+                    begin
+                        if ((n = 0) or (n = 1)) then return 1;
+
+                        return n + fibonacci(n - 1);
+                    end
+                    

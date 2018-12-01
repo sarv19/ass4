@@ -1,0 +1,2 @@
+procedure main(); begin putInt(100); end
+                    var a:integer;

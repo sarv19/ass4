@@ -1,0 +1,7 @@
+ procedure main();
+                    var a:boolean;
+                    begin
+                        a := not true;
+                        putBool(a);
+                    end
+                    var b:real;

@@ -116,13 +116,23 @@ class CodeGenVisitor(BaseVisitor, Utils):
         #c: Any
 
         self.emit.printout(self.emit.emitPROLOG(self.className, "java.lang.Object"))
-        e = SubBody(None, self.env)
+
+        # for x in ast.decl:
+        #     if type(x) is VarDecl:
+        #         e = self.visit(x, e)
+        # for x in ast.decl:
+        #     if type(x) is FuncDecl:
+        #         e=self.visit(x,e)
+        decl_all = list()
         for x in ast.decl:
             if type(x) is VarDecl:
-                e = self.visit(x, e)
+                decl_all.append(Symbol(x.variable.name, x.varType))
         for x in ast.decl:
             if type(x) is FuncDecl:
-                e=self.visit(x,e)
+                decl_all.append(Symbol(x.name.name,MType([i.varType for i in x.param],x.returnType), CName(self.className) ))
+        e = SubBody(None, self.env+decl_all)
+        for x in ast.decl:
+            k = self.visit(x,e)
         # generate default constructor
         self.genMETHOD(FuncDecl(Id("<init>"), list(), list(), list(),None), c, Frame("<init>", VoidType))
         self.emit.emitEPILOG()
@@ -146,6 +156,7 @@ class CodeGenVisitor(BaseVisitor, Utils):
 
         glenv = o
 
+
         # Generate code for parameter declarations
         if isInit:
             self.emit.printout(self.emit.emitVAR(frame.getNewIndex(), "this", ClassType(self.className), frame.getStartLabel(), frame.getEndLabel(), frame))
@@ -164,6 +175,8 @@ class CodeGenVisitor(BaseVisitor, Utils):
         if isInit:
             self.emit.printout(self.emit.emitREADVAR("this", ClassType(self.className), 0, frame))
             self.emit.printout(self.emit.emitINVOKESPECIAL(frame))
+
+
         list(map(lambda x: self.visit(x, SubBody(frame, decl + glenv)), body))
 
         self.emit.printout(self.emit.emitLABEL(frame.getEndLabel(), frame))
@@ -180,12 +193,14 @@ class CodeGenVisitor(BaseVisitor, Utils):
     def visitFuncDecl(self, ast, o):
         #ast: FuncDecl
         #o: Any
+        # for x in o.sym:
+        #     print(ast.name,x.name)
 
         subctxt = o
         frame = Frame(ast.name.name, ast.returnType)
         self.genMETHOD(ast, o.sym, frame)
         # print(ast.returnType)
-        return SubBody(None, [Symbol(ast.name.name,MType(list(map(lambda x: x.varType,ast.param)),ast.returnType),CName(self.className))]+o.sym)
+        # return SubBody(None, [Symbol(ast.name.name,MType(list(map(lambda x: x.varType,ast.param)),ast.returnType),CName(self.className))]+o.sym)
 
     def visitCallStmt(self, ast, o):
         #ast: CallStmt
@@ -194,7 +209,10 @@ class CodeGenVisitor(BaseVisitor, Utils):
         ctxt = o
         frame = ctxt.frame
         nenv = ctxt.sym
+
         sym = self.lookup(ast.method.name.lower(), nenv, lambda x: x.name.lower())
+
+
         cname = sym.value.value
 
         ctype = sym.mtype
@@ -222,6 +240,7 @@ class CodeGenVisitor(BaseVisitor, Utils):
         frame = ctxt.frame
         nenv = ctxt.sym
         sym = self.lookup(ast.method.name.lower(), nenv, lambda x: x.name.lower())
+        print(sym.mtype)
         cname = sym.value.value
 
         ctype = sym.mtype

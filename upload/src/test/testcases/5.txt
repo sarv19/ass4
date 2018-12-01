@@ -1,0 +1,1 @@
+procedure main(); begin putInt(6 diV 4); end

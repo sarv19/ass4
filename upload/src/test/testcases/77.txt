@@ -1,0 +1,10 @@
+ procedure mAin();
+                  begin
+                      putString(getString("F"));
+                  end
+
+                  function getString(str : string):string;
+                  begin
+                      return str;
+                  end
+                    

@@ -1,0 +1,15 @@
+
+                    procedure main();
+                    var b:integer;
+                    begin
+                        a := b := 1;
+                        with a:integer; do
+                            begin
+                                a := b;
+                                putIntLn(a);
+                            end
+                        putFloat(a + b);
+                    end
+
+                    var a:real;
+                    

@@ -1,0 +1,19 @@
+ var a:integer;
+
+                    procedure foo();
+                    begin
+                        a := a + 1;
+                    end
+
+                    procedure main();
+                    begin
+                        a := 0;
+                        with a:integer; do
+                            begin
+                                a := 5;
+                                foo();
+                                putIntLn(a);
+                            end
+                        putInt(a);
+                    end
+                    

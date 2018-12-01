@@ -1,0 +1,18 @@
+ procedure main();
+                    begin
+                        putFLoat(getPi(1000000));
+                    end
+
+                    function getPi(n : integer):real;
+                    var counter:integer; pi : real; sign : integer;
+                    begin
+                        pi := 0;
+                        sign := 1;
+                        for counter := 1 to n do
+                            begin
+                                pi := pi + (sign*4)/(2*counter - 1);
+                                sign := sign * (-1);
+                            end
+                        return pi;
+                    end
+                    
