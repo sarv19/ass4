@@ -471,6 +471,9 @@ class CheckCodeGenSuite(unittest.TestCase):
     #     self.assertTrue(TestCodeGen.test(input,expect,500))
 
     def test_4(self):
-        input=
-        expect = "true\n3\n1"
+        input=Program([FuncDecl(Id('main'),[],[VarDecl(Id('a'),IntType())],
+                      [Assign(Id('a'),BinaryOp('+',BinaryOp('-',IntLiteral(10),
+                                                   BinaryOp('*',IntLiteral(9),IntLiteral(8))),BinaryOp('DIV',IntLiteral(6),IntLiteral(4)))),
+                       CallStmt(Id('putInt'),[Id('a')]),Return(None)],VoidType())])
+        expect = "-61"
         self.assertTrue(TestCodeGen.test(input,expect,500))

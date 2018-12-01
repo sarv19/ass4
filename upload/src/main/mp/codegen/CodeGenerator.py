@@ -335,8 +335,8 @@ class CodeGenVisitor(BaseVisitor, Utils):
                 return left + self.emit.emitI2F(frame) + right + self.emit.emitADDOP(str(ast.op), FloatType(), frame), FloatType()
             elif type(lefttype) is FloatType:
                 return left + right + self.emit.emitI2F(frame) + self.emit.emitADDOP(str(ast.op), FloatType(), frame), FloatType()
-        elif ast.op in ['mod','div']:
-             if ast.op == 'mod':
+        elif ast.op.lower() in ['mod','div']:
+             if ast.op.lower() == 'mod':
                  return left + right + self.emit.emitMOD(frame), IntType()
              else:
                 return left + right + self.emit.emitDIV(frame), IntType()
@@ -442,7 +442,7 @@ class CodeGenVisitor(BaseVisitor, Utils):
         self.emit.printout(exp1)
         self.emit.printout(condi)
 
-        condi_index = self.lookup(ast.id.name, o.sym, lambda x: x.name)
+        condi_index = self.lookup(ast.id.name.lower(), o.sym, lambda x: x.name.lower())
         # self.emit.printout(self.emit.emitWRITEVAR(ast.id.name, IntType(),condi_index.value.value,frame))
         #if up -1, if downto +1
         self.emit.printout(self.emit.emitREADVAR(ast.id.name, IntType(), condi_index.value.value, frame) + self.emit.emitPUSHICONST(1,frame))
