@@ -126,7 +126,7 @@ class CodeGenVisitor(BaseVisitor, Utils):
         decl_all = list()
         for x in ast.decl:
             if type(x) is VarDecl:
-                decl_all.append(Symbol(x.variable.name, x.varType))
+                decl_all.append(Symbol(x.variable.name, x.varType,Index(c.frame.getNewIndex())))
         for x in ast.decl:
             if type(x) is FuncDecl:
                 decl_all.append(Symbol(x.name.name,MType([i.varType for i in x.param],x.returnType), CName(self.className) ))
@@ -198,6 +198,8 @@ class CodeGenVisitor(BaseVisitor, Utils):
 
         subctxt = o
         frame = Frame(ast.name.name, ast.returnType)
+        for x in o.sym:
+            print(x.name)
         self.genMETHOD(ast, o.sym, frame)
         # print(ast.returnType)
         # return SubBody(None, [Symbol(ast.name.name,MType(list(map(lambda x: x.varType,ast.param)),ast.returnType),CName(self.className))]+o.sym)
@@ -240,7 +242,7 @@ class CodeGenVisitor(BaseVisitor, Utils):
         frame = ctxt.frame
         nenv = ctxt.sym
         sym = self.lookup(ast.method.name.lower(), nenv, lambda x: x.name.lower())
-        print(sym.mtype)
+
         cname = sym.value.value
 
         ctype = sym.mtype
@@ -316,12 +318,12 @@ class CodeGenVisitor(BaseVisitor, Utils):
                 result = list()
                 labelF = frame.getNewLabel()
                 labelO = frame.getNewLabel()
-                frame.pop()
+                result.append(left)
                 result.append(self.emit.jvm.emitDUP())
                 result.append(self.emit.jvm.emitIFEQ(labelO))
                 result.append(self.emit.emitGOTO(labelF,frame))
                 result.append(self.emit.emitLABEL(labelF,frame))
-                frame.pop()
+                result.append(right)
                 result.append(self.emit.emitANDOP(frame))
                 result.append(self.emit.emitLABEL(labelO,frame))
                 return ''.join(result), BoolType()
@@ -391,16 +393,17 @@ class CodeGenVisitor(BaseVisitor, Utils):
     def visitAssign(self, ast, o):
         rc, rt = self.visit(ast.exp, Access(o.frame, o.sym, False, True))
         lc, lt = self.visit(ast.lhs, Access(o.frame, o.sym, True, False))
-        if type(rt) is type(lt):
-            self.emit.printout(rc+lc)
-        elif type(rt) is IntType and type(lt) is FloatType:
+
+        if type(rt) is IntType and type(lt) is FloatType:
             self.emit.printout(rc + self.emit.emitI2F(o.frame) + lc)
+        # if type(rt) is type(lt):
+        else:
+            self.emit.printout(rc+lc)
 
     def visitId(self, ast, o):
         ctxt = o
         frame = ctxt.frame
         sym = self.lookup(ast.name.lower(), o.sym, lambda x: x.name.lower())
-
         if o.isLeft:
             if type(sym.value) is CName:
                 return self.emit.emitPUTSTATIC(sym.value.value + "/" + sym.name, sym.mtype, frame), sym.mtype

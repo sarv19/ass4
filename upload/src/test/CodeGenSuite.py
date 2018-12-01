@@ -5,137 +5,137 @@ from AST import *
 
 class CheckCodeGenSuite(unittest.TestCase):
 
-
-    # def test_with_1(self):
-    #     """Simple program: int main() {} """
-    #     input = """ procedure main();
-    #                 begin
-    #                     with a:integer; do
-    #                         begin
-    #                             a := 1;
-    #                             putInt(a);
-    #                         end
-    #                 end"""
-    #     expect = "1"
-    #     self.assertTrue(TestCodeGen.test(input,expect,22))
-    #
-    # def test_if_1(self):
-    #     """Simple program: int main() {} """
-    #     input = """ procedure main();
-    #                 var a:integer;
-    #                 begin
-    #                     a := 2;
-    #                     if (a > 1) then
-    #                         begin
-    #                             a := a + 1;
-    #                             putInt(a);
-    #
-    #                         end
-    #                     else
-    #                         putInt(a - 1);
-    #                 end"""
-    #     expect = "3"
-    #     self.assertTrue(TestCodeGen.test(input,expect,23))
-    #
-    # def test_int2float_1(self):
-    #     """Simple program: int main() {} """
-    #     input = """ procedure main();
-    #
-    #                 begin
-    #                     putFloat(1);
-    #                 end"""
-    #     expect = "1.0"
-    #     self.assertTrue(TestCodeGen.test(input,expect,24))
-    #
-    # def test_while_1(self):
-    #     """Simple program: int main() {} """
-    #     input = """ procedure main();
-    #                 var a:integer;
-    #                 begin
-    #                     a := 0;
-    #                     while (a < 10) do
-    #                         a := a + 1;
-    #
-    #                     putInt(a);
-    #                 end"""
-    #     expect = "10"
-    #     self.assertTrue(TestCodeGen.test(input,expect,25))
-    #
-    # def test_while_2(self):
-    #     """Simple program: int main() {} """
-    #     input = """ procedure main();
-    #                 var a:integer;
-    #                 begin
-    #                     a := 0;
-    #                     while (a < 10) do
-    #                         begin
-    #                             if (a = 5) then break;
-    #                             a := a + 1;
-    #                         end
-    #
-    #                     putInt(a);
-    #                 end"""
-    #     expect = "5"
-    #     self.assertTrue(TestCodeGen.test(input,expect,26))
-    #
-    # def test_for_1(self):
-    #     """Simple program: int main() {} """
-    #     input = """ procedure main();
-    #                 var a,b:integer;
-    #                 begin
-    #                     for a := 0 to 5 do
-    #                         b := 1;
-    #                     putInt(a);
-    #                 end"""
-    #     expect = "6"
-    #     self.assertTrue(TestCodeGen.test(input,expect,27))
-    #
-    #
-    # def test_call_expr_1(self):
-    #     """Simple program: int main() {} """
-    #     input = """
-    #                 procedure main();
-    #                 begin
-    #                     foo(1);
-    #                 end
-    #
-    #                 procedure foo(b:integer);
-    #                 begin
-    #                     return;
-    #                 end"""
-    #     expect = ""
-    #     self.assertTrue(TestCodeGen.test(input,expect,28))
-
-    def test_and_1(self):
-        """Simple program: int main() {} """
-        input = """
-                    procedure main();
-                    begin
-                        putBool(true and then false and then foo());
-                    end
-
-                    function foo():boolean;
-                    begin
-                        putInt(1);
-                        return true;
-                    end
-                    """
-        expect = "false"
-        self.assertTrue(TestCodeGen.test(input,expect,29))
-
-    # def test_float_3(self):
-    #     """Simple program: int main() {} """
-    #     input = """
-    #                 procedure main();
-    #                 var a:integer; b:real;
-    #                 begin
-    #                     b := 2.2;
-    #                     putFloat(b);
-    #                 end
-    #                 """
-    #     expect = "2.2"
-    #     self.assertTrue(TestCodeGen.test(input,expect,30))
-
+#
+#     def test_with_1(self):
+#         """Simple program: int main() {} """
+#         input = """ procedure main();
+#                     begin
+#                         with a:integer; do
+#                             begin
+#                                 a := 1;
+#                                 putInt(a);
+#                             end
+#                     end"""
+#         expect = "1"
+#         self.assertTrue(TestCodeGen.test(input,expect,22))
+#
+#     def test_if_1(self):
+#         """Simple program: int main() {} """
+#         input = """ procedure main();
+#                     var a:integer;
+#                     begin
+#                         a := 2;
+#                         if (a > 1) then
+#                             begin
+#                                 a := a + 1;
+#                                 putInt(a);
+#
+#                             end
+#                         else
+#                             putInt(a - 1);
+#                     end"""
+#         expect = "3"
+#         self.assertTrue(TestCodeGen.test(input,expect,23))
+#
+#     def test_int2float_1(self):
+#         """Simple program: int main() {} """
+#         input = """ procedure main();
+#
+#                     begin
+#                         putFloat(1);
+#                     end"""
+#         expect = "1.0"
+#         self.assertTrue(TestCodeGen.test(input,expect,24))
+#
+#     def test_while_1(self):
+#         """Simple program: int main() {} """
+#         input = """ procedure main();
+#                     var a:integer;
+#                     begin
+#                         a := 0;
+#                         while (a < 10) do
+#                             a := a + 1;
+#
+#                         putInt(a);
+#                     end"""
+#         expect = "10"
+#         self.assertTrue(TestCodeGen.test(input,expect,25))
+#
+#     def test_while_2(self):
+#         """Simple program: int main() {} """
+#         input = """ procedure main();
+#                     var a:integer;
+#                     begin
+#                         a := 0;
+#                         while (a < 10) do
+#                             begin
+#                                 if (a = 5) then break;
+#                                 a := a + 1;
+#                             end
+#
+#                         putInt(a);
+#                     end"""
+#         expect = "5"
+#         self.assertTrue(TestCodeGen.test(input,expect,26))
+#
+#     def test_for_1(self):
+#         """Simple program: int main() {} """
+#         input = """ procedure main();
+#                     var a,b:integer;
+#                     begin
+#                         for a := 0 to 5 do
+#                             b := 1;
+#                         putInt(a);
+#                     end"""
+#         expect = "6"
+#         self.assertTrue(TestCodeGen.test(input,expect,27))
+#
+#
+#     def test_call_expr_1(self):
+#         """Simple program: int main() {} """
+#         input = """
+#                     procedure main();
+#                     begin
+#                         foo(1);
+#                     end
+#
+#                     procedure foo(b:integer);
+#                     begin
+#                         return;
+#                     end"""
+#         expect = ""
+#         self.assertTrue(TestCodeGen.test(input,expect,28))
+#
+#     def test_and_1(self):
+#         """Simple program: int main() {} """
+#         input = """
+#                     procedure main();
+#                     begin
+#                         putBool(true and then false and then foo());
+#                     end
+#
+#                     function foo():boolean;
+#                     begin
+#                         putInt(1);
+#                         return true;
+#                     end
+#                     """
+#         expect = "false"
+#         self.assertTrue(TestCodeGen.test(input,expect,29))
+#
+#     def test_float_3(self):
+#         """Simple program: int main() {} """
+#         input = """
+#                     procedure main();
+#                     var a:integer; b:real;
+#                     begin
+#                         b := 2.2;
+#                         putFloat(b);
+#                     end
+#                     """
+#         expect = "2.2"
+#         self.assertTrue(TestCodeGen.test(input,expect,30))
+#
 #     def test_fibonacci(self):
 #         """Simple program: int main() {} """
 #         input = """
@@ -211,193 +211,202 @@ class CheckCodeGenSuite(unittest.TestCase):
 #                     """
 #         expect = "120"
 #         self.assertTrue(TestCodeGen.test(input,expect,33))
-#
-#     def test_random_1(self):
-#         """Simple program: int main() {} """
-#         input = """ function square(n : integer):integer;
-#                     begin return n*n; end
-#
-#                     function addBy1(n : integer):integer;
-#                     begin return n + 1; end
-#
-#                     function minusBy1(n : integer):integer;
-#                     begin return n - 1; end
-#
-#                     function diff(a: real; b: real ):real;
-#                     begin
-#                         if isPositive(a - b) then return a - b;
-#                         else return b - a;
-#                     end
-#
-#                     function isPositive(n : real):boolean;
-#                     begin return n >= 0; end
-#
-#                     procedure main();
-#                     var n:integer; difference:real;
-#                     begin
-#                         n := 5;
-#                         difference := diff(square(addBy1(n)) , square(minusBy1(n)));
-#                         putFloatLn(difference);
-#                         putBoolLn(isPositive(difference));
-#                     end
-#                     """
-#         expect = """20.0
-# true
-# """
-#         self.assertTrue(TestCodeGen.test(input,expect,34))
-#
-#     def test_random_2(self):
-#         """Simple program: int main() {} """
-#         input = """ procedure swap(a,b:real);
-#                     var temp:real;
-#                     begin
-#                         temp := a;
-#                         a := b;
-#                         b := temp;
-#                         putStringLn("Swap successful");
-#                         putString("a = "); putFloatLn(a);
-#                         putString("b = "); putFloatLn(b);
-#                     end
-#
-#                     procedure main();
-#                     var a,b:integer;
-#                     begin
-#                         a := 5;
-#                         b := 10;
-#                         putString("a = "); putFloatLn(a);
-#                         putString("b = "); putFloatLn(b);
-#
-#                         swap(a,b);
-#                     end
-#                     """
-#         expect = "a = 5.0\nb = 10.0\nSwap successful\na = 10.0\nb = 5.0\n"
-#         self.assertTrue(TestCodeGen.test(input,expect,35))
-#
-#     def test_with_2(self):
-#         """Simple program: int main() {} """
-#         input = """
-#                     procedure main();
-#                     begin
-#                         putInt(foo());
-#                     end
-#
-#                     function foo():integer;
-#                     begin
-#                         with a:integer; do
-#                             if (2 < 1) then return 1;
-#                             else return 2;
-#                     end
-#                     """
-#         expect = "2"
-#         self.assertTrue(TestCodeGen.test(input,expect,36))
-#
-#     def test_example(self):
-#         """Simple program: int main() {} """
-#         input = """
-#                     var i:integer;
-#                     function f():integer;
-#                     begin
-#                         return 200;
-#                     end
-#
-#                     procedure main();
-#                     var main:integer;
-#                     begin
-#                         main := g := f();
-#                         putIntLn(main);
-#                         with i:integer; main:integer; f:integer; do
-#                             begin
-#                                 main := f := i := 100;
-#                                 putIntLn(i);
-#                                 putIntLn(main);
-#                                 putIntLn(f);
-#                                 putIntLn(g);
-#                             end
-#                         putIntLn(main);
-#
-#                     end
-#                     var g:integer;
-#                     """
-#         expect = "200\n100\n100\n100\n200\n200\n"
-#         self.assertTrue(TestCodeGen.test(input,expect,37))
-#
-#     def test_toHexa(self):
-#         """Simple program: int main() {} """
-#         input = """
-#                     procedure toHexadecimal(n : integer);
-#                     var quotient, remainder:integer;
-#                     begin
-#
-#                         if (n = 0) then return;
-#
-#                         quotient := n div 16;
-#                         remainder := n mod 16;
-#
-#                         toHexadecimal(quotient);
-#
-#                         if (remainder >= 0) and (remainder <= 9) then putInt(remainder);
-#                         else
-#                             begin
-#                                 if remainder = 10 then putString("A");
-#                                 if remainder = 11 then putString("B");
-#                                 if remainder = 12 then putString("C");
-#                                 if remainder = 13 then putString("D");
-#                                 if remainder = 14 then putString("E");
-#                                 if remainder = 15 then putString("F");
-#                             end
-#
-#                     end
-#
-#                     procedure main();
-#                     begin
-#                         toHexadecimal(1000);
-#                     end
-#                     """
-#         expect = "3E8"
-#         self.assertTrue(TestCodeGen.test(input,expect,38))
-#
-#     def test_procedure_recursion(self):
-#         """Simple program: int main() {} """
-#         input = """
-#                     procedure print2console(n : integer);
-#                     begin
-#                         if n = -1 then return;
-#                         putInt(n);
-#                         print2console(n - 1);
-#                         putInt(n);
-#                     end
-#                     procedure main();
-#                     begin
-#                         print2console(5);
-#                     end
-#                     """
-#         expect = "543210012345"
-#         self.assertTrue(TestCodeGen.test(input,expect,39))
-#
-#     def test_toBinary(self):
-#         """Simple program: int main() {} """
-#         input = """
-#                     procedure toBinary(n : integer);
-#                     var quotient, remainder: integer;
-#                     begin
-#                         if n = 0 then return;
-#
-#                         quotient := n div 2;
-#                         remainder := n mod 2;
-#
-#                         toBinary(quotient);
-#
-#                         putInt(remainder);
-#                     end
-#
-#                     procedure main();
-#                     begin
-#                         toBinary(10);
-#                     end
-#                     """
-#         expect = "1010"
-#         self.assertTrue(TestCodeGen.test(input,expect,40))
-#
+
+    # def test_random_1(self):
+    #     """Simple program: int main() {} """
+    #     input = """ function square(n : integer):integer;
+    #                 begin return n*n; end
+    #
+    #                 function addBy1(n : integer):integer;
+    #                 begin return n + 1; end
+    #
+    #                 function minusBy1(n : integer):integer;
+    #                 begin return n - 1; end
+    #
+    #                 function diff(a: real; b: real ):real;
+    #                 begin
+    #                     if isPositive(a - b) then return a - b;
+    #                     else return b - a;
+    #                 end
+    #
+    #                 function isPositive(n : real):boolean;
+    #                 begin return n >= 0; end
+    #
+    #                 procedure main();
+    #                 var n:integer; difference:real;
+    #                 begin
+    #                     n := 5;
+    #                     difference := diff(square(addBy1(n)) , square(minusBy1(n)));
+    #                     putFloatLn(difference);
+    #                     putBoolLn(isPositive(difference));
+    #                 end
+    #                 """
+    #     expect = "20.0\ntrue\n"
+    #     self.assertTrue(TestCodeGen.test(input,expect,34))
+
+    # def test_random_2(self):
+    #     """Simple program: int main() {} """
+    #     input = """ procedure swap(a,b:real);
+    #                 var temp:real;
+    #                 begin
+    #                     temp := a;
+    #                     a := b;
+    #                     b := temp;
+    #                     putStringLn("Swap successful");
+    #                     putString("a = "); putFloatLn(a);
+    #                     putString("b = "); putFloatLn(b);
+    #                 end
+    #
+    #                 procedure main();
+    #                 var a,b:integer;
+    #                 begin
+    #                     a := 5;
+    #                     b := 10;
+    #                     putString("a = "); putFloatLn(a);
+    #                     putString("b = "); putFloatLn(b);
+    #
+    #                     swap(a,b);
+    #                 end
+    #                 """
+    #     expect = "a = 5.0\nb = 10.0\nSwap successful\na = 10.0\nb = 5.0\n"
+    #     self.assertTrue(TestCodeGen.test(input,expect,35))
+    #
+    # def test_with_2(self):
+    #     """Simple program: int main() {} """
+    #     input = """
+    #                 procedure main();
+    #                 begin
+    #                     putInt(foo());
+    #                 end
+    #
+    #                 function foo():integer;
+    #                 begin
+    #                     with a:integer; do
+    #                         if (2 < 1) then return 1;
+    #                         else return 2;
+    #                 end
+    #                 """
+    #     expect = "2"
+    #     self.assertTrue(TestCodeGen.test(input,expect,36))
+
+    # def test_example(self):
+    #     """Simple program: int main() {} """
+    #     input = """
+    #                 var i:integer;
+    #                 function f():integer;
+    #                 begin
+    #                     return 200;
+    #                 end
+    #
+    #                 procedure main();
+    #                 var main:integer;
+    #                 begin
+    #                     mainn := g := f();
+    #                     putIntLn(main);
+    #                     with i:integer; main:integer; f:integer; do
+    #                         begin
+    #                             main := f := i := 100;
+    #                             putIntLn(i);
+    #                             putIntLn(main);
+    #                             putIntLn(f);
+    #                             putIntLn(g);
+    #                         end
+    #                     putIntLn(main);
+    #
+    #                 end
+    #                 var g:integer;
+    #                 """
+    #     expect = "200\n100\n100\n100\n200\n200\n"
+    #     self.assertTrue(TestCodeGen.test(input,expect,37))
+
+    def test_global_assign_5(self):
+        input = """
+        var a: boolean;
+        procedure main();
+        begin
+            a := NoT TrUe;
+            putBool(NoT a);
+        end
+        """
+        expect = "true"
+        self.assertTrue(TestCodeGen.test(input,expect,525))
+    # def test_toHexa(self):
+    #     """Simple program: int main() {} """
+    #     input = """
+    #                 procedure toHexadecimal(n : integer);
+    #                 var quotient, remainder:integer;
+    #                 begin
+    #
+    #                     if (n = 0) then return;
+    #
+    #                     quotient := n div 16;
+    #                     remainder := n mod 16;
+    #
+    #                     toHexadecimal(quotient);
+    #
+    #                     if (remainder >= 0) and (remainder <= 9) then putInt(remainder);
+    #                     else
+    #                         begin
+    #                             if remainder = 10 then putString("A");
+    #                             if remainder = 11 then putString("B");
+    #                             if remainder = 12 then putString("C");
+    #                             if remainder = 13 then putString("D");
+    #                             if remainder = 14 then putString("E");
+    #                             if remainder = 15 then putString("F");
+    #                         end
+    #
+    #                 end
+    #
+    #                 procedure main();
+    #                 begin
+    #                     toHexadecimal(1000);
+    #                 end
+    #                 """
+    #     expect = "3E8"
+    #     self.assertTrue(TestCodeGen.test(input,expect,38))
+    #
+    # def test_procedure_recursion(self):
+    #     """Simple program: int main() {} """
+    #     input = """
+    #                 procedure print2console(n : integer);
+    #                 begin
+    #                     if n = -1 then return;
+    #                     putInt(n);
+    #                     print2console(n - 1);
+    #                     putInt(n);
+    #                 end
+    #                 procedure main();
+    #                 begin
+    #                     print2console(5);
+    #                 end
+    #                 """
+    #     expect = "543210012345"
+    #     self.assertTrue(TestCodeGen.test(input,expect,39))
+    #
+    # def test_toBinary(self):
+    #     """Simple program: int main() {} """
+    #     input = """
+    #                 procedure toBinary(n : integer);
+    #                 var quotient, remainder: integer;
+    #                 begin
+    #                     if n = 0 then return;
+    #
+    #                     quotient := n div 2;
+    #                     remainder := n mod 2;
+    #
+    #                     toBinary(quotient);
+    #
+    #                     putInt(remainder);
+    #                 end
+    #
+    #                 procedure main();
+    #                 begin
+    #                     toBinary(10);
+    #                 end
+    #                 """
+    #     expect = "1010"
+    #     self.assertTrue(TestCodeGen.test(input,expect,40))
+
 #     def test_var_5(self):
 #         """Simple program: int main() {} """
 #         input = """ var a:integer;

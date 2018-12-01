@@ -8,7 +8,7 @@
                     procedure main();
                     var main:integer;
                     begin
-                        main := g := f();
+                        mainn := g := f();
                         putIntLn(main);
                         with i:integer; main:integer; f:integer; do
                             begin

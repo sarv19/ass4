@@ -1,1 +1,8 @@
-Program([FuncDecl(Id(main),[],VoidType(),[],[CallStmt(Id(putBool),[BinaryOp(<>,IntLiteral(5),IntLiteral(5))])])])
+
+        var a: boolean;
+        procedure main();
+        begin
+            a := NoT TrUe;
+            putBool(NoT a);
+        end
+        
