@@ -136,7 +136,7 @@ class CodeGenVisitor(BaseVisitor, Utils):
         isInit = consdecl.returnType is None
         isMain = consdecl.name.name.lower() == "main" and len(consdecl.param) == 0 and type(consdecl.returnType) is VoidType
         returnType = VoidType() if isInit else consdecl.returnType
-        methodName = "<init>" if isInit else consdecl.name.name
+        methodName = "<init>" if isInit else consdecl.name.name ## need lower()????
         intype = [ArrayPointerType(StringType())] if isMain else list(map(lambda x: x.varType,consdecl.param))
         mtype = MType(intype, returnType)
 
@@ -273,7 +273,7 @@ class CodeGenVisitor(BaseVisitor, Utils):
 
         ctxt = o
         frame = ctxt.frame
-        if ast.value == True:
+        if str(ast.value).lower() == 'true':
             in_ = 'true'
         else:
             in_ = 'false'

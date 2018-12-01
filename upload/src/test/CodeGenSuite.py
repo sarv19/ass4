@@ -251,7 +251,7 @@ class CheckCodeGenSuite(unittest.TestCase):
     # 	expect = "5"
     # 	self.assertTrue(TestCodeGen.test(input,expect,601))
     #
-    # def test_assign1(self):
+    # def test_assign3(self):
     # 	input = Program([VarDecl(Id('a'), IntType()),
     #                      VarDecl(Id('b'), FloatType()),
     #                      VarDecl(Id('c'), StringType()),
@@ -259,7 +259,7 @@ class CheckCodeGenSuite(unittest.TestCase):
     #             Assign(Id('b'),IntLiteral(5)),
     # 			CallStmt(Id("putFloat"),[Id('b')])])])
     # 	expect = "5.0"
-    # 	self.assertTrue(TestCodeGen.test(input,expect,601))
+    # 	self.assertTrue(TestCodeGen.test(input,expect,603))
     #
     # def test_assign2(self):
     # 	input = Program([VarDecl(Id('a'), IntType()),
@@ -334,7 +334,7 @@ class CheckCodeGenSuite(unittest.TestCase):
     #     """
     # 	expect = "7"
     # 	self.assertTrue(TestCodeGen.test(input,expect,802))
-
+    #
     # def test_for1(self):
     # 	input = """
     #         procedure main();
@@ -347,7 +347,7 @@ class CheckCodeGenSuite(unittest.TestCase):
     #     """
     # 	expect = "7.0\n7.0\n7.0\n7.0\n7.0\n"
     # 	self.assertTrue(TestCodeGen.test(input,expect,803))
-
+    #
     # def test_call_expr1(self):
     # 	input = """
     #         function foo(b:integer):integer;
@@ -364,7 +364,7 @@ class CheckCodeGenSuite(unittest.TestCase):
     #     """
     # 	expect = "2"
     # 	self.assertTrue(TestCodeGen.test(input,expect,901))
-
+    #
     # def test_return1(self):
     # 	input = """
     #         function foo(n:integer):boolean;
@@ -470,10 +470,10 @@ class CheckCodeGenSuite(unittest.TestCase):
     #     expect = "true\n3\n1"
     #     self.assertTrue(TestCodeGen.test(input,expect,500))
 
-    def test_4(self):
-        input=Program([FuncDecl(Id('main'),[],[VarDecl(Id('a'),IntType())],
-                      [Assign(Id('a'),BinaryOp('+',BinaryOp('-',IntLiteral(10),
-                                                   BinaryOp('*',IntLiteral(9),IntLiteral(8))),BinaryOp('DIV',IntLiteral(6),IntLiteral(4)))),
-                       CallStmt(Id('putInt'),[Id('a')]),Return(None)],VoidType())])
-        expect = "-61"
-        self.assertTrue(TestCodeGen.test(input,expect,500))
+    # def test_4(self):
+    #     input=Program([FuncDecl(Id('main'),[],[VarDecl(Id('a'),IntType())],
+    #                   [Assign(Id('a'),BinaryOp('+',BinaryOp('-',IntLiteral(10),
+    #                                                BinaryOp('*',IntLiteral(9),IntLiteral(8))),BinaryOp('DIV',IntLiteral(6),IntLiteral(4)))),
+    #                    CallStmt(Id('putInt'),[Id('a')]),Return(None)],VoidType())])
+    #     expect = "-61"
+    #     self.assertTrue(TestCodeGen.test(input,expect,500))

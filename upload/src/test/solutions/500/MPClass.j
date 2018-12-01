@@ -4,25 +4,13 @@
 
 .method public static main([Ljava/lang/String;)V
 .var 0 is args [Ljava/lang/String; from Label0 to Label1
-.var 1 is a I from Label0 to Label1
 Label0:
-	bipush 10
-	bipush 9
-	bipush 8
-	imul
-	isub
-	bipush 6
-	iconst_4
-	idiv
-	iadd
-	istore_1
-	iload_1
+	bipush 100
 	invokestatic io/putInt(I)V
-	return
 Label1:
 	return
-.limit stack 3
-.limit locals 2
+.limit stack 1
+.limit locals 1
 .end method
 
 .method public <init>()V
