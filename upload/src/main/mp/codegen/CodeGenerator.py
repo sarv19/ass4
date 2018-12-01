@@ -123,16 +123,21 @@ class CodeGenVisitor(BaseVisitor, Utils):
         # for x in ast.decl:
         #     if type(x) is FuncDecl:
         #         e=self.visit(x,e)
+        # framee =Frame(ast.name.name, ast.returnType)
         decl_all = list()
         for x in ast.decl:
             if type(x) is VarDecl:
-                decl_all.append(Symbol(x.variable.name, x.varType,Index(c.frame.getNewIndex())))
+                decl_all.append(Symbol(x.variable.name, x.varType,CName(self.className)))
         for x in ast.decl:
             if type(x) is FuncDecl:
                 decl_all.append(Symbol(x.name.name,MType([i.varType for i in x.param],x.returnType), CName(self.className) ))
         e = SubBody(None, self.env+decl_all)
         for x in ast.decl:
-            k = self.visit(x,e)
+            if type(x) is VarDecl:
+                k = self.visit(x, e)
+        for x in ast.decl:
+            if type(x) is FuncDecl:
+                k=self.visit(x,e)
         # generate default constructor
         self.genMETHOD(FuncDecl(Id("<init>"), list(), list(), list(),None), c, Frame("<init>", VoidType))
         self.emit.emitEPILOG()
@@ -187,8 +192,9 @@ class CodeGenVisitor(BaseVisitor, Utils):
 
     def visitVarDecl(self, ast, o):
         subctxt = o
-        self.emit.printout(self.emit.emitATTRIBUTE(ast.variable.name, ast.varType, False, None))
+        self.emit.printout(self.emit.emitATTRIBUTE(ast.variable.name, ast.varType, False, ""))
         return SubBody(None, [Symbol(ast.variable.name, ast.varType, CName(self.className))]+subctxt.sym)
+        # return SubBody(None, subctxt.sym)
 
     def visitFuncDecl(self, ast, o):
         #ast: FuncDecl
@@ -198,11 +204,10 @@ class CodeGenVisitor(BaseVisitor, Utils):
 
         subctxt = o
         frame = Frame(ast.name.name, ast.returnType)
-        for x in o.sym:
-            print(x.name)
+
         self.genMETHOD(ast, o.sym, frame)
         # print(ast.returnType)
-        # return SubBody(None, [Symbol(ast.name.name,MType(list(map(lambda x: x.varType,ast.param)),ast.returnType),CName(self.className))]+o.sym)
+        return SubBody(None, o.sym)
 
     def visitCallStmt(self, ast, o):
         #ast: CallStmt
@@ -253,7 +258,7 @@ class CodeGenVisitor(BaseVisitor, Utils):
             str1, typ1 = self.visit(x, Access(frame, nenv, False, True))
             if type(typ1) is IntType and type(sym.mtype.partype[n]) is FloatType:
                 # in_ = (in_[0] + str1, in_[1].append(typ1))
-                in_ = (in_[0] + str1 + self.emit.emitI2F(frame), in_[1] + [typ1])
+                in_ = (in_[0] + str1 + self.emit.emitI2F(frame), in_[1] + [FloatType()])
             else:
                 in_ = (in_[0] + str1, in_[1] + [typ1])
             n+=1
@@ -384,15 +389,15 @@ class CodeGenVisitor(BaseVisitor, Utils):
         ctxt = o
         frame = ctxt.frame
         nenv = ctxt.sym
-        left, lefttype = self.visit(ast.body, Access(frame,nenv,True, True))
+        left, lefttype = self.visit(ast.body, Access(frame,nenv,False, True))
         if ast.op == '-':
             return left + self.emit.emitNEGOP(lefttype, frame), lefttype
-        else:
+        elif ast.op.lower() == 'not':
             return left + self.emit.emitNOT(BoolType(), frame), BoolType()
 
     def visitAssign(self, ast, o):
         rc, rt = self.visit(ast.exp, Access(o.frame, o.sym, False, True))
-        lc, lt = self.visit(ast.lhs, Access(o.frame, o.sym, True, False))
+        lc, lt = self.visit(ast.lhs, Access(o.frame, o.sym, True, True))
 
         if type(rt) is IntType and type(lt) is FloatType:
             self.emit.printout(rc + self.emit.emitI2F(o.frame) + lc)
@@ -404,6 +409,7 @@ class CodeGenVisitor(BaseVisitor, Utils):
         ctxt = o
         frame = ctxt.frame
         sym = self.lookup(ast.name.lower(), o.sym, lambda x: x.name.lower())
+
         if o.isLeft:
             if type(sym.value) is CName:
                 return self.emit.emitPUTSTATIC(sym.value.value + "/" + sym.name, sym.mtype, frame), sym.mtype

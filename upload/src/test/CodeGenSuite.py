@@ -5,7 +5,7 @@ from AST import *
 
 class CheckCodeGenSuite(unittest.TestCase):
 
-#
+
 #     def test_with_1(self):
 #         """Simple program: int main() {} """
 #         input = """ procedure main();
@@ -270,25 +270,25 @@ class CheckCodeGenSuite(unittest.TestCase):
     #                 """
     #     expect = "a = 5.0\nb = 10.0\nSwap successful\na = 10.0\nb = 5.0\n"
     #     self.assertTrue(TestCodeGen.test(input,expect,35))
-    #
-    # def test_with_2(self):
-    #     """Simple program: int main() {} """
-    #     input = """
-    #                 procedure main();
-    #                 begin
-    #                     putInt(foo());
-    #                 end
-    #
-    #                 function foo():integer;
-    #                 begin
-    #                     with a:integer; do
-    #                         if (2 < 1) then return 1;
-    #                         else return 2;
-    #                 end
-    #                 """
-    #     expect = "2"
-    #     self.assertTrue(TestCodeGen.test(input,expect,36))
 
+    def test_with_2(self):
+        """Simple program: int main() {} """
+        input = """
+                    procedure main();
+                    begin
+                        putInt(foo());
+                    end
+
+                    function foo():integer;
+                    begin
+                        with a:integer; do
+                            if (2 < 1) then return 1;
+                            else return 2;
+                    end
+                    """
+        expect = "2"
+        self.assertTrue(TestCodeGen.test(input,expect,36))
+    #
     # def test_example(self):
     #     """Simple program: int main() {} """
     #     input = """
@@ -301,7 +301,7 @@ class CheckCodeGenSuite(unittest.TestCase):
     #                 procedure main();
     #                 var main:integer;
     #                 begin
-    #                     mainn := g := f();
+    #                     main := g := f();
     #                     putIntLn(main);
     #                     with i:integer; main:integer; f:integer; do
     #                         begin
@@ -316,20 +316,36 @@ class CheckCodeGenSuite(unittest.TestCase):
     #                 end
     #                 var g:integer;
     #                 """
+    #
     #     expect = "200\n100\n100\n100\n200\n200\n"
     #     self.assertTrue(TestCodeGen.test(input,expect,37))
 
-    def test_global_assign_5(self):
-        input = """
-        var a: boolean;
-        procedure main();
-        begin
-            a := NoT TrUe;
-            putBool(NoT a);
-        end
-        """
-        expect = "true"
-        self.assertTrue(TestCodeGen.test(input,expect,525))
+    # def test_example(self):
+    #     """Simple program: int main() {} """
+    #     input = """
+    #                 var i:integer;
+    #                 function f():integer;
+    #                 begin
+    #                     return 20;
+    #                 end
+    #
+    #                 procedure main();
+    #                 begin
+    #                     putInt(f());
+    #
+    #                 end
+    #                 var g:integer;
+    #                 """
+    #
+    #     expect = "200\n100\n100\n100\n200\n200\n"
+    #     self.assertTrue(TestCodeGen.test(input,expect,38))
+
+    # def test_global_assign_5(self):
+    #     input = Program([FuncDecl(Id('main'),[],[VarDecl(Id('a'),BoolType())],
+    #                                 [Assign(Id('a'), UnaryOp('not',BooleanLiteral(True))), CallStmt(Id('putBool'), [UnaryOp('not', Id('a'))])])])
+    #
+    #     expect = "true"
+    #     self.assertTrue(TestCodeGen.test(input,expect,525))
     # def test_toHexa(self):
     #     """Simple program: int main() {} """
     #     input = """

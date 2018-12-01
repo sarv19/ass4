@@ -1,8 +1,9 @@
 
-        var a: boolean;
+
         procedure main();
+        var a: boolean;
         begin
-            a := NoT TrUe;
-            putBool(NoT a);
+            a := not true;
+            putBool(not a);
         end
         
