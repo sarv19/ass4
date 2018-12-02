@@ -1,0 +1,24 @@
+
+            procedure main();
+            var i,j:integer;
+            begin
+                for i:=1 to 9 do
+                    begin
+                        i:=i+2;
+                        for j:=1 to i do
+                            begin
+                                putString("*");
+
+                            end
+                            putLn();
+                    end
+                for i:=9 downto 1 do
+                    begin
+                        for j:=i downto 1 do
+                            begin
+                                putString("*");
+                                putLn();
+                            end
+                    end
+            end
+        

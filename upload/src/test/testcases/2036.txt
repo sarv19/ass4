@@ -1,0 +1,18 @@
+
+            function T(n:integer):real;
+            BEGIN
+                if n=0 then return 1;
+                return T(n-1)*2*n;
+            end
+            function sum(n:integer):real;
+            begin
+                if n=0 then return 1;
+                return T(n-1)+1/T(n);
+            end
+
+
+            procedure main();
+            begin
+                putFloat(sum(5));
+            end
+        

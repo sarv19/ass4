@@ -1,0 +1,18 @@
+
+            function algo(n:integer):integer;
+            BEGIN
+                if n=1 then return 1;
+                return algo(n-1)*n;
+            end
+
+            function sum(n:integer):integer;
+            begin
+                if n=1 then return 1;
+                return sum(n-1) + algo(n-1)*n;
+            end
+
+            procedure main();
+            begin
+                putInt(sum(5));
+            end
+        

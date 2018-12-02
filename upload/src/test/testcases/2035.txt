@@ -1,0 +1,18 @@
+
+            function power(x,y:integer):real;
+            BEGIN
+                if y=0 then return 1;
+                else
+                    BEGIN
+                        if y<0 then return power(x,y+1)*(1/x);
+                        else
+                            return x*power(x, y-1);
+                    end
+            end
+
+
+            procedure main();
+            begin
+                putFloat(power(5,2));
+            end
+        

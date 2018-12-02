@@ -1,0 +1,25 @@
+
+            function power(x,n:real):real;
+            BEGIN
+                if n=1 then return x;
+                return power(x,n-1)*x;
+            end
+
+            function algo(n:real):real;
+            begin
+                if n=1 then return 1;
+                return algo(n-1)*n;
+            end
+
+            function power_algo(x,n:real):real;
+            begin
+                if n=1 then return x;
+                return power_algo(x, n-1)+((power(x,n-1)*x)/(algo(n-1)*n));
+            end
+
+
+            procedure main();
+            begin
+                putFloat(power_algo(3,10));
+            end
+        

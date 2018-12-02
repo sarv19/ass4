@@ -455,6 +455,31 @@ class CheckCodeGenSuite(unittest.TestCase):
     #     """
     # 	expect = "2"
     # 	self.assertTrue(TestCodeGen.test(input,expect,1001))
+
+    # def test_call_expr2(self):
+    # 	input = """
+    #         function increase1(b:integer):integer;
+    #         BEGIN
+    #             return b+1;
+    #         end
+    #
+    #         function double(b:integer):integer;
+    #         BEGIN
+    #             return b*2;
+    #         end
+    #
+    #         function half(b:integer):integer;
+    #         BEGIN
+    #             return b div 2;
+    #         end
+    #
+    #         procedure main();
+    #         begin
+    #             putInt(increase1(half(increase1(double(5)))));
+    #         end
+    #     """
+    # 	expect = "6"
+    # 	self.assertTrue(TestCodeGen.test(input,expect,1002))
     #
     # def test_return1(self):
     # 	input = """
@@ -537,7 +562,7 @@ class CheckCodeGenSuite(unittest.TestCase):
     #     expect = "**\n**\n"
     #     self.assertTrue(TestCodeGen.test(input,expect,2003))
     #
-    # def test_mixstyle_3(self):
+    # def test_mixstyle_4(self):
     #     input="""
     #         procedure answer(a:integer);
     #                  begin
@@ -1104,7 +1129,7 @@ class CheckCodeGenSuite(unittest.TestCase):
     #     """
     #     expect = "0.75"
     #     self.assertTrue(TestCodeGen.test(input,expect,2029))
-
+    #
     # def test_mixstyle_30(self):
     #     input="""
     #         function xor(a:boolean;b:boolean): boolean;
@@ -1124,7 +1149,7 @@ class CheckCodeGenSuite(unittest.TestCase):
     #     """
     #     expect = "false"
     #     self.assertTrue(TestCodeGen.test(input,expect,2030))
-
+    #
     # def test_mixstyle_31(self):
     #     input="""
     #         procedure reverse(n: integer);
@@ -1143,7 +1168,7 @@ class CheckCodeGenSuite(unittest.TestCase):
     #     """
     #     expect = "51"
     #     self.assertTrue(TestCodeGen.test(input,expect,2031))
-
+    #
     # def test_mixstyle_32(self):
     #     input="""
     #         function     count(n: integer):integer;
@@ -1160,7 +1185,7 @@ class CheckCodeGenSuite(unittest.TestCase):
     #     """
     #     expect = "5"
     #     self.assertTrue(TestCodeGen.test(input,expect,2032))
-
+    #
     # def test_mixstyle_33(self):
     #     input="""
     #         function logarit(n: integer):integer;
@@ -1179,22 +1204,162 @@ class CheckCodeGenSuite(unittest.TestCase):
     #     """
     #     expect = "4"
     #     self.assertTrue(TestCodeGen.test(input,expect,2033))
+    #
+    # def test_mixstyle_34(self):
+    #     input="""
+    #         function algo(n:integer):integer;
+    #         BEGIN
+    #             if n=1 then return 1;
+    #             return algo(n-1)*n;
+    #         end
+    #
+    #         function sum(n:integer):integer;
+    #         begin
+    #             if n=1 then return 1;
+    #             return sum(n-1) + algo(n-1)*n;
+    #         end
+    #
+    #         procedure main();
+    #         begin
+    #             putInt(sum(5));
+    #         end
+    #     """
+    #     expect = "153"
+    #     self.assertTrue(TestCodeGen.test(input,expect,2034))
+    #
+    # def test_mixstyle_35(self):
+    #     input="""
+    #         function power(x,y:integer):real;
+    #         BEGIN
+    #             if y=0 then return 1;
+    #             else
+    #                 BEGIN
+    #                     if y<0 then return power(x,y+1)*(1/x);
+    #                     else
+    #                         return x*power(x, y-1);
+    #                 end
+    #         end
+    #
+    #
+    #         procedure main();
+    #         begin
+    #             putFloat(power(5,2));
+    #         end
+    #     """
+    #     expect = "25.0"
+    #     self.assertTrue(TestCodeGen.test(input,expect,2035))
+    #
+    # def test_mixstyle_36(self):
+    #     input="""
+    #         function T(n:integer):real;
+    #         BEGIN
+    #             if n=0 then return 1;
+    #             return T(n-1)*2*n;
+    #         end
+    #         function sum(n:integer):real;
+    #         begin
+    #             if n=0 then return 1;
+    #             return T(n-1)+1/T(n);
+    #         end
+    #
+    #
+    #         procedure main();
+    #         begin
+    #             putFloat(sum(5));
+    #         end
+    #     """
+    #     expect = "384.00027"
+    #     self.assertTrue(TestCodeGen.test(input,expect,2036))
 
-    def test_mixstyle_31(self):
+    # def test_mixstyle_37(self):
+    #     input="""
+    #         function power(x,n:real):real;
+    #         BEGIN
+    #             if n=1 then return x;
+    #             return power(x,n-1)*x;
+    #         end
+    #
+    #         function algo(n:real):real;
+    #         begin
+    #             if n=1 then return 1;
+    #             return algo(n-1)*n;
+    #         end
+    #
+    #         function power_algo(x,n:real):real;
+    #         begin
+    #             if n=1 then return x;
+    #             return power_algo(x, n-1)+((power(x,n-1)*x)/(algo(n-1)*n));
+    #         end
+    #
+    #
+    #         procedure main();
+    #         begin
+    #             putFloat(power_algo(3,10));
+    #         end
+    #     """
+    #     expect = "19.079666"
+    #     self.assertTrue(TestCodeGen.test(input,expect,2037))
+
+    # def test_mixstyle_38(self):
+    #     input="""
+    #         procedure main();
+    #         var i,j:integer;
+    #         begin
+    #             i:=7;
+    #             j:=7;
+    #             for i:=1 to 7 do
+    #                 begin
+    #                     for j:=7-i downto 1 do
+    #                         putString("*");
+    #                         putLn();
+    #                 end
+    #         end
+    #     """
+    #     expect = "******\n*****\n****\n***\n**\n*\n\n"
+    #     self.assertTrue(TestCodeGen.test(input,expect,2038))
+
+    # def test_mixstyle_39(self):
+    #     input="""
+    #         procedure main();
+    #         var i,j, k:integer;
+    #         begin
+    #             for i:=1 to 7 do
+    #                 begin
+    #                     for j:=1 to i do
+    #                         putInt(j);
+    #                     for k:=7-i downto 1 do
+    #                         putString("*");
+    #                     putLn();
+    #                 end
+    #         end
+    #     """
+    #     expect = "1******\n12*****\n123****\n1234***\n12345**\n123456*\n1234567\n"
+    #     self.assertTrue(TestCodeGen.test(input,expect,2039))
+
+    def test_mixstyle_40(self):
         input="""
-            procedure reverse(n: integer);
+            procedure main();
+            var i,j:integer;
             begin
-                if n <> 0 then
+                for i:=1 to 9 do
                     begin
-                        putInt(n mod 10);
-                        reverse(n div 10);
+                        i:=i+2;
+                        for j:=1 to i do
+                            begin
+                                putString("*");
+
+                            end
+                            putLn();
+                    end
+                for i:=9 downto 1 do
+                    begin
+                        for j:=i downto 1 do
+                            begin
+                                putString("*");
+                                putLn();
+                            end
                     end
             end
-
-            procedure main();
-            begin
-                reverse(15);
-            end
         """
-        expect = "51"
-        self.assertTrue(TestCodeGen.test(input,expect,2031))
+        expect = "1******\n12*****\n123****\n1234***\n12345**\n123456*\n1234567\n"
+        self.assertTrue(TestCodeGen.test(input,expect,2040))
