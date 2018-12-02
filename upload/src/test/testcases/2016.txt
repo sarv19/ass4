@@ -1,0 +1,15 @@
+
+            function distance(xa:integer;ya:integer;x0:integer;y0:integer): real;
+                begin
+                    return (xa-x0)*(xa-x0) + (ya-y0)*(ya-y0);
+                end
+            function isCircle(xa:integer;ya:integer;x0:integer;y0:integer;r:real): boolean;
+                BEGIN
+                    return distance(xa,ya,x0,y0)<= r*r;
+                end
+
+            procedure main();
+            begin
+                putBool(isCircle(3,2,0,0,4.5));
+            end
+        

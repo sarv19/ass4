@@ -1,9 +1,14 @@
 
             procedure main();
-
-                var a: integer;
+            var a: integer;
             begin
-                for a:= 1 to 5 do
-                    putFloatLn(7);
+                a:=6;
+                if (a>=5) and (a<10) then
+                    begin
+                        a:=a+1;
+                        putInt(a);
+                    end
+                else
+                    putInt(a-1);
             end
         

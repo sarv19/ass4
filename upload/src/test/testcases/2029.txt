@@ -1,0 +1,12 @@
+
+            function foo(a: integer): real;
+            begin
+                if a>1 then
+                    return a/foo(a-1);
+                else return 0.5;
+            end
+            procedure main();
+            begin
+                putfloat(foo(3));
+            end
+        

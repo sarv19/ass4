@@ -1,14 +1,30 @@
 
-                    var i:integer;
-                    function f():integer;
+                    procedure toHexadecimal(n : integer);
+                    var quotient, remainder:integer;
                     begin
-                        return 20;
+
+                        if (n = 0) then return;
+
+                        quotient := n div 16;
+                        remainder := n mod 16;
+
+                        toHexadecimal(quotient);
+
+                        if (remainder >= 0) and (remainder <= 9) then putInt(remainder);
+                        else
+                            begin
+                                if remainder = 10 then putString("A");
+                                if remainder = 11 then putString("B");
+                                if remainder = 12 then putString("C");
+                                if remainder = 13 then putString("D");
+                                if remainder = 14 then putString("E");
+                                if remainder = 15 then putString("F");
+                            end
+
                     end
 
                     procedure main();
                     begin
-                        putInt(f());
-
+                        toHexadecimal(1000);
                     end
-                    var g:integer;
                     

@@ -1,13 +1,9 @@
 
-            function foo(b:integer):integer;
-            BEGIN
-                return b+1;
-            end
-
             procedure main();
+
                 var a: integer;
             begin
-                a:=1;
-                putInt(foo(1));
+                for a:= 1 to 5 do
+                    putFloatLn(7);
             end
         

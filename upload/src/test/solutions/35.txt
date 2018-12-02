@@ -1,5 +1,0 @@
-a = 5.0
-b = 10.0
-Swap successful
-a = 10.0
-b = 5.0

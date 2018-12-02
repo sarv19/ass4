@@ -1,0 +1,28 @@
+
+            var a: integer;
+
+            function checkEven(i:integer): boolean;
+                begin
+                    if i mod 2 = 0 then
+                        begin
+                            a:=a+2;
+                            return True;
+                        end
+                    else
+                        begin
+                            a:=a*2;
+                            return False;
+                        end
+                end
+
+            procedure main();
+
+            begin
+                a:=1;
+                putBoolLn(checkEven(a));
+                putIntLn(a);
+                a:=2;
+                putBoolLn(checkEven(a));
+                putInt(a);
+            end
+        

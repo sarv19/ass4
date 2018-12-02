@@ -1,0 +1,23 @@
+
+            procedure rec(a:integer;b:integer);
+            var i,n:integer;
+            BEGIN
+                if (a<3) then
+                begin
+                    putString("fail");
+                    return;
+                end
+
+                for i:=1 to a do
+                begin
+                    for n:=1 to b do
+                        putString("*");
+                    putLn();
+                end
+            end
+
+            procedure main();
+            begin
+                rec(2,3);
+            end
+        

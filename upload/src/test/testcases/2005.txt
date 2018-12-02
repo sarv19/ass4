@@ -1,0 +1,40 @@
+
+            function dectohex(a:integer):string;
+                     begin
+                        if (a=0) then
+                            return "0";
+                        else if (a=1) then
+                            return "1";
+                        else if (a=2) then
+                            return "2";
+                        else if (a=3) then
+                            return "3";
+                        else if (a=4) then
+                            return "4";
+                        else if (a=5) then
+                            return "5";
+                        else if (a=6) then
+                            return "6";
+                        else if (a=7) then
+                            return "7";
+                        else if (a=8) then
+                            return "8";
+                        else if (a=9) then
+                            return "9";
+                        else if (a=10) then
+                            return "A";
+                        else if (a=11) then
+                            return "B";
+                        else if (a=12) then
+                            return "C";
+                        else if (a=13) then
+                            return "D";
+                        else if (a=14) then
+                            return "E";
+                        else return "F";
+                     end
+            procedure main();
+            begin
+                putString(dectohex(10));
+            end
+        

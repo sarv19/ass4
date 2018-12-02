@@ -1,0 +1,19 @@
+
+            procedure checkEven(a:integer);
+                begin
+                    if a mod 2 = 0 then
+                        putString("oh yeah");
+                    else
+                        putString("no no no");
+                end
+
+            procedure main();
+            var a: integer;
+            begin
+                checkEven(5);
+                putLn();
+                checkEven(4);
+                putLn();
+                checkEven(100);
+            end
+        

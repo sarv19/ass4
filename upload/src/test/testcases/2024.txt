@@ -1,0 +1,17 @@
+
+            procedure main();
+            var a: boolean;
+             i,n : boolean;
+            begin
+
+                a:=false;
+
+                for i:=1 to 20 do
+                BEGIN
+                    for n:=1 to 10 do
+                        a:= not a;
+                    a:= not a;
+                end
+                putBool(a);
+            end
+        

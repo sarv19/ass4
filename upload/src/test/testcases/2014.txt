@@ -1,0 +1,12 @@
+
+            function xor(a:boolean;b:boolean): boolean;
+                begin
+                    return (a and  (not b)) or ((not a) and b);
+                end
+
+            procedure main();
+            begin
+                putBoolLn(xor(true,false));
+                putBoolLn(xor(false,false));
+            end
+        

@@ -1,0 +1,13 @@
+
+            function gtokg(a:integer): real;
+            var b:real;
+            begin
+
+                b:=a;
+                return b/1000;
+            end
+            procedure main();
+            begin
+                putFloat(gtokg(5190));
+            end
+        

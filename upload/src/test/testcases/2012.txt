@@ -1,0 +1,15 @@
+
+            procedure loop(step:integer;a:integer;b:integer);
+                BEGIN
+                    while (a<=b) do
+                    BEGIN
+                        putIntLn(a);
+                        a:=a+step;
+                    end
+                end
+
+            procedure main();
+            begin
+                loop(3,10,20);
+            end
+        

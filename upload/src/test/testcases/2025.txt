@@ -1,0 +1,21 @@
+
+            procedure main();
+            var a:integer;
+            begin
+
+                a:=0;
+                while (a>=0) do
+                BEGIN
+                    a:=a+5;
+                    with b:real; do
+                        BEGIN
+                            b:=a/1.5;
+                            b:=b*3.3;
+                            a:=a-6;
+                        end
+                    with c:boolean; do
+                        c:= not false;
+                end
+                putInt(a);
+            end
+        

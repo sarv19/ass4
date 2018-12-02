@@ -1,0 +1,24 @@
+
+            procedure letterL(a:integer);
+            var i:integer;
+            BEGIN
+                if (a<2) then
+                begin
+                    putString("fail");
+                    return;
+                end
+
+                for i:=1 to a do
+                    begin
+                        putString("*");
+                        putLn();
+                    end
+                for i:=1 to a do
+                    putString("*");
+            end
+
+            procedure main();
+            begin
+                letterL(3);
+            end
+        

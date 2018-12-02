@@ -1,0 +1,19 @@
+
+            function log(a:integer;b:integer):integer;
+                var i:integer;
+                     begin
+
+                        i:=0;
+                        while (a>1) do
+                         BEGIN
+                            if (a mod b <> 0 ) then
+                                break;
+                            a:=a+1;
+                         end
+                         return a;
+                     end
+            procedure main();
+            begin
+                putInt(log(27,3));
+            end
+        

@@ -1,0 +1,17 @@
+
+            procedure square(a:integer);
+                    var x,y:integer;
+                     begin
+
+                        for x:=1 to a do
+                            begin
+                                for y:=1 to a do
+                                    putString("*");
+                                putLn();
+                            end
+                     end
+            procedure main();
+            begin
+                square(2);
+            end
+        

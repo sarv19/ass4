@@ -1,0 +1,14 @@
+
+            function round(a:real): integer;
+            var i: integer;
+                BEGIN
+
+                    i:=0;
+                    while (i+1<a) do i:=i+1;
+                    return i;
+                 end
+            procedure main();
+            begin
+                putInt(round(9.5));
+            end
+        

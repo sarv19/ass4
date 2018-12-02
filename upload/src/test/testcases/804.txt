@@ -1,0 +1,14 @@
+
+            procedure main();
+            var a: integer;
+            begin
+                a:=6;
+                if (a <> 0) or (a>=-1) then
+                    begin
+                        a:=a+1;
+                        putFloat(a);
+                    end
+                else
+                    putInt(a-1);
+            end
+        

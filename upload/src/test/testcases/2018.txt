@@ -1,0 +1,17 @@
+
+            procedure letterI(a:integer);
+            var i:integer;
+            BEGIN
+
+                for i:=1 to a do
+                    begin
+                        putString("*");
+                        putLn();
+                    end
+            end
+
+            procedure main();
+            begin
+                letterI(2);
+            end
+        

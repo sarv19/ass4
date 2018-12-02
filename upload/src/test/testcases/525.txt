@@ -1,9 +1,1 @@
-
-
-        procedure main();
-        var a: boolean;
-        begin
-            a := not true;
-            putBool(not a);
-        end
-        
+Program([FuncDecl(Id(main),[],VoidType(),[],[CallStmt(Id(putBool),[BinaryOp(<>,IntLiteral(5),IntLiteral(5))])])])

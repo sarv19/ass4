@@ -1,0 +1,15 @@
+
+            function logarit(n: integer):integer;
+            begin
+                if n < 0 then
+                    return -1;
+                if n>=2 then
+                    return 1+logarit(n div 2);
+                else return 0;
+            end
+
+            procedure main();
+            begin
+                putInt(logarit(16));
+            end
+        

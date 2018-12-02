@@ -1,0 +1,27 @@
+
+            procedure letterC(a:integer);
+            var i:integer;
+            BEGIN
+                if (a<3) then
+                begin
+                    putString("fail");
+                    return;
+                end
+
+                for i:=1 to a do
+                    putString("*");
+                putLn();
+                for i:=1 to a do
+                    begin
+                        putString("*");
+                        putLn();
+                    end
+                for i:=1 to a do
+                    putString("*");
+            end
+
+            procedure main();
+            begin
+                letterC(2);
+            end
+        

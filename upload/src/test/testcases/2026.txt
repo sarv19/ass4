@@ -1,0 +1,13 @@
+
+            procedure main();
+            Var a:integer;
+            begin
+
+                for a:=1 to 1000 do
+                    BEGIN
+                        if a<10 then continue;
+                        if a<15 then putIntLn(a);
+                        else break;
+                    end
+            end
+        

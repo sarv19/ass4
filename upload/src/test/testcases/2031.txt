@@ -1,0 +1,15 @@
+
+            procedure reverse(n: integer);
+            begin
+                if n <> 0 then
+                    begin
+                        putInt(n mod 10);
+                        reverse(n div 10);
+                    end
+            end
+
+            procedure main();
+            begin
+                reverse(15);
+            end
+        

@@ -1,0 +1,13 @@
+
+            function     count(n: integer):integer;
+            begin
+                if n = 0 then
+                    return 0;
+                return 1+count(n div 10);
+            end
+
+            procedure main();
+            begin
+                putInt(count(15112));
+            end
+        

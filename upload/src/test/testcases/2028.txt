@@ -1,0 +1,13 @@
+
+            function foo(a: integer): integer;
+            begin
+                if a>1 then
+                    return a*foo(a-1);
+                else return 0;
+            end
+            procedure main();
+
+            begin
+                putInt(foo(101));
+            end
+        

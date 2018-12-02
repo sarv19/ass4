@@ -1,13 +1,13 @@
 
-            function foo(n:integer):boolean;
-            begin
-                if (n = 1) or (n = 0 )then
-                    return false;
-                return true;
+            function foo(b:integer):integer;
+            BEGIN
+                return b+1;
             end
 
             procedure main();
-            BEGIN
-                putBool(foo(5));
+                var a: integer;
+            begin
+                a:=1;
+                putInt(foo(1));
             end
         

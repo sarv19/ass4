@@ -1,0 +1,14 @@
+
+            function percent(a:integer;b:integer): real;
+                var c,d:real;
+                begin
+                    c:=a;
+                    d:=b;
+                    return c / d*100;
+                end
+
+            procedure main();
+            begin
+                putFloat(percent(3,8));
+            end
+        

@@ -1,0 +1,13 @@
+
+            function foo(n:integer):boolean;
+            begin
+                if (n = 1) or (n = 0 )then
+                    return false;
+                return true;
+            end
+
+            procedure main();
+            BEGIN
+                putBool(foo(5));
+            end
+        

@@ -1,0 +1,10 @@
+
+            function divide(a:integer;b:integer): real;
+            begin
+                return a / b;
+            end
+            procedure main();
+            begin
+                putFloat(divide(5,2));
+            end
+        

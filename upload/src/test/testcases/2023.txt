@@ -1,0 +1,25 @@
+
+            function sum(a:integer):integer;
+            var sum,temp: integer;
+            BEGIN
+
+                sum:=0;
+                with i: integer; do
+                    for i:=1 to a do
+                        begin
+                            with n: integer; do
+                                begin
+                                    temp:=1;
+                                    for n:=1 to i do
+                                        temp:=temp*a;
+                                end
+                            sum:=sum+temp;
+                        end
+                return sum;
+            end
+
+            procedure main();
+            begin
+                putInt(sum(2));
+            end
+        

@@ -1,0 +1,30 @@
+
+            function menu(a:integer):boolean;
+                     begin
+                        if (a=1) then
+                            putString("Vit quay");
+                        if (a=2) then
+                            putString("Mi vit tiem");
+                        if (a=3) then
+                            putString("Mi sui cao");
+                        if (a=4) then
+                            putString("Finish");
+                        else
+                            putString("Wrong");
+                        if (a=4) then
+                            return True;
+                        putLn();
+                        return False;
+                     end
+            procedure main();
+            var finish:boolean;
+            begin
+
+                finish=false;
+                while (not finish) do
+                begin
+                    finish:=menu(1);
+                    finish:=menu(4);
+                end
+            end
+        

@@ -1,0 +1,16 @@
+
+            function xor(a:boolean;b:boolean): boolean;
+            begin
+                return (a and  (not b)) or ((not a) and b);
+            end
+            function foo(a: boolean; i: integer): boolean;
+            begin
+                if i>1 then
+                    return xor(a, foo(a,i-1));
+                else return false;
+            end
+                    procedure main();
+            begin
+                putbool(foo(True,3));
+            end
+        

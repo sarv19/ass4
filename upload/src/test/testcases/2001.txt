@@ -1,0 +1,15 @@
+
+            function power(x:integer;a:integer):integer;
+                    var i,b: integer;
+                     begin
+
+                         b:=1;
+                         for i:=1 to a do
+                            b:=b*x;
+                         return b;
+                     end
+            procedure main();
+            begin
+                putInt(power(2,4));
+            end
+        

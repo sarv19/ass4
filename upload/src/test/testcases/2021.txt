@@ -1,0 +1,13 @@
+
+            var pi:real;
+            function circle_area(a:integer):real;
+            BEGIN
+                return pi*a*a;
+            end
+
+            procedure main();
+            begin
+                pi:=3.14;
+                putFloat(circle_area(1));
+            end
+        

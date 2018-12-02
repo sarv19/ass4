@@ -151,7 +151,13 @@ class CodeGenVisitor(BaseVisitor, Utils):
         isInit = consdecl.returnType is None
         isMain = consdecl.name.name.lower() == "main" and len(consdecl.param) == 0 and type(consdecl.returnType) is VoidType
         returnType = VoidType() if isInit else consdecl.returnType
-        methodName = "<init>" if isInit else consdecl.name.name ## need lower()????
+        # methodName = "<init>" if isInit else consdecl.name.name ## need lower()????
+        if isInit:
+            methodName = "<init>"
+        elif consdecl.name.name.lower() == 'main':
+            methodName = consdecl.name.name.lower()
+        else:
+            methodName = consdecl.name.name
         intype = [ArrayPointerType(StringType())] if isMain else list(map(lambda x: x.varType,consdecl.param))
         mtype = MType(intype, returnType)
 
@@ -448,16 +454,50 @@ class CodeGenVisitor(BaseVisitor, Utils):
         frame = ctxt.frame
         # result = list()
         exp, typee = self.visit(ast.expr, Access(o.frame, o.sym, False, True))
+
         self.emit.printout(exp)
         label1 = frame.getNewLabel()
         label2 = frame.getNewLabel()
+
         self.emit.printout(self.emit.emitIFFALSE(label1,frame))
+
         [self.visit(x,SubBody(frame, o.sym)) for x in ast.thenStmt]
-        self.emit.printout(self.emit.emitGOTO(label2,frame))
+
+        checkthen = self.checkReturn(ast.thenStmt)
+        if ast.elseStmt != []:
+            checkelse = self.checkReturn(ast.elseStmt)
+        else:
+            checkelse = False
+
+        if (checkthen and checkelse) is False:
+            self.emit.printout(self.emit.emitGOTO(label2,frame))
+
         self.emit.printout(self.emit.emitLABEL(label1, frame))
+
         [self.visit(x, SubBody(frame, o.sym)) for x in ast.elseStmt]
+
         self.emit.printout(self.emit.emitLABEL(label2, frame))
 
+    def checkReturn(self, body):  ##check enough return in [stmt]
+        for x in body:
+            if (self.checkReturnStatement(x) is True):
+                return True
+        return False
+
+    def checkReturnStatement(self, state): ##check if enough return in one stmt
+        if type(state) is If:
+            thenn = self.checkReturn(state.thenStmt)
+            if state.elseStmt is not None:
+                elsee = self.checkReturn(state.elseStmt)
+            else:
+                elsee =  False
+            return thenn and elsee ##what if else is empty??
+        elif type(state) is With:
+            return self.checkReturn(state.stmt)
+        elif type(state) is Return:
+            return True
+        return False
+        
     def visitFor(self, ast, o):
         ctxt = o
         frame = ctxt.frame

@@ -2,30 +2,38 @@
 .class public MPClass
 .super java.lang.Object
 
-.method public static foo(I)I
-.var 0 is b I from Label0 to Label1
-Label0:
-	iload_0
-	iconst_1
-	iadd
-	ireturn
-Label1:
-.limit stack 2
-.limit locals 1
-.end method
-
 .method public static main([Ljava/lang/String;)V
 .var 0 is args [Ljava/lang/String; from Label0 to Label1
 .var 1 is a I from Label0 to Label1
 Label0:
 	iconst_1
 	istore_1
+	iload_1
 	iconst_1
-	invokestatic MPClass/foo(I)I
-	invokestatic io/putInt(I)V
+	isub
+	istore_1
+Label2:
+	iload_1
+	iconst_1
+	iadd
+	istore_1
+	iload_1
+	iconst_5
+	if_icmpgt Label4
+	iconst_1
+	goto Label5
+Label4:
+	iconst_0
+Label5:
+	ifle Label3
+	bipush 7
+	i2f
+	invokestatic io/putFloatLn(F)V
+	goto Label2
+Label3:
 Label1:
 	return
-.limit stack 1
+.limit stack 3
 .limit locals 2
 .end method
 
